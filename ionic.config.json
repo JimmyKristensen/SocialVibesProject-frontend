@@ -1,0 +1,7 @@
+{
+  "name": "SocialVibesProject-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
