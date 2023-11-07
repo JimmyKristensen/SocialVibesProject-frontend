@@ -6,7 +6,8 @@ import { FrontpagePage } from './frontpage.page';
 const routes: Routes = [
   {
     path: '',
-    component: FrontpagePage
+    component: FrontpagePage,
+    data: { standalone: true }
   }
 ];
 
@@ -15,3 +16,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class FrontpagePageRoutingModule {}
+
+
