@@ -6,7 +6,8 @@ import { FrontpagePage } from './frontpage.page';
 const routes: Routes = [
   {
     path: '',
-    component: FrontpagePage
+    component: FrontpagePage,
+    data: { standalone: true }
   }
 ];
 

@@ -11,7 +11,7 @@ export class FrontpagePage {
 
   login() {
  
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['./tabs']);
   }
 }
 
