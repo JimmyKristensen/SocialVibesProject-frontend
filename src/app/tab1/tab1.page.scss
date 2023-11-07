@@ -1,6 +1,33 @@
-.chat-profil{
-    width: 50px;
+#chat-tabs{
+    border-radius: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.chat-profile{
     border-radius: 25px;
-    border: solid 3px;
+    border: solid 2px;
     border-color: aquamarine;
+}
+
+
+.number-of-messages{
+    background-color: #f6ac0d;
+    height: 25px;
+    width: 25px;
+    padding-top: 4px;
+    margin-left: 25px;
+    border-radius: 50%;
+}
+
+.number-of-messages-none{
+    height: 25px;
+    width: 25px;
+    padding-top: 4px;
+    margin-left: 25px;
+}
+
+.notification-bell{
+    margin-right: 20px;
+    font-size: 25px;
 }
