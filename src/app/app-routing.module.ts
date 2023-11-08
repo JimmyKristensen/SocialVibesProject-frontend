@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { GroupsModule } from './tab1/groups/groups.module';
 
 const routes: Routes = [
  {
@@ -13,6 +14,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
+    GroupsModule,
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]

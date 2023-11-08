@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Chat / Social
+    </ion-title>
+    <ion-icon slot="end" name="notifications-outline" class="notification-bell"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Chat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item id="chat-tabs" class="ion-margin-top ion-margin-bottom">
+    <ion-tabs>
+      <ion-tab-bar slot="top">
+        <ion-tab-button tab="Friends">
+          Friends
+        </ion-tab-button>
+        <ion-tab-button tab="Groups">
+          Groups
+        </ion-tab-button>
+        <ion-tab-button tab="Communities">
+          Communities
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-item>
+</ion-content>
+
