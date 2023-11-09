@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: "invidchat",
-    loadChildren: () => import('./invidchat/invidchat.module').then( m => m.InvidchatPageModule)
+    loadChildren: () => import('./tab1/invidchat/invidchat.module').then( m => m.InvidchatPageModule)
   }
 ];
 @NgModule({

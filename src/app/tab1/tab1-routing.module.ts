@@ -22,6 +22,10 @@ const routes: Routes = [
   path: 'Communities',
   component: CommunitiesComponent,
 },
+{
+  path: "invidchat",
+  loadChildren: () => import('./invidchat/invidchat.module').then( m => m.InvidchatPageModule)
+}
 ];
 
 @NgModule({

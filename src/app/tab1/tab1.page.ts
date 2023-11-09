@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -7,10 +8,13 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
   selectedTab: string = 'Friends'; // Default to Friends tab
-
-  constructor() {}
+  constructor(private router: Router) {}
 
   showContent(tab: string) {
     this.selectedTab = tab;
+  }
+
+  invidChat() {
+    this.router.navigate(['./invidChat']);
   }
 }
