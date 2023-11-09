@@ -1,11 +1,11 @@
-.message-received {
+.user-received-message {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 10px;
     align-items: flex-start;
   }
   
-  .message-received .message-bubble {
+  .user-received-message .message-bubble {
     background-color: white;
     color: black;
     padding: 10px;
@@ -13,13 +13,13 @@
     margin-left: 10px;
   }
   
-  .message-sent {
+  .user-sent-message {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
   }
   
-  .message-sent .message-bubble {
+  .user-sent-message .message-bubble {
     background-color: blue;
     color: white;
     padding: 10px;
@@ -47,16 +47,18 @@
   }
   
 .chat-profile{
+
     height: 25px;
     width: 25px;
     border-radius: 25px;
     border: solid 2px;
     border-color: aquamarine;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 .username {
     font-size: 0.8em;
     color: #888;
     margin-bottom: 5px;
+    margin-left: 35px;
   }
 

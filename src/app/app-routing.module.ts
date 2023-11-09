@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path: "tabs",
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'groupchat',
     loadChildren: () => import('./groupchat/groupchat.module').then( m => m.GroupchatPageModule)
   }
