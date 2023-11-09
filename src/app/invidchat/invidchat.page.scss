@@ -1,0 +1,26 @@
+.message-sent {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  /*.message-sent .message-bubble {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+  }*/
+  
+  .message-received {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  /*.message-received .message-bubble {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  */
