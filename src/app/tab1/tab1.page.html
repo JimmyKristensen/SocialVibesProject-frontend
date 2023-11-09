@@ -15,74 +15,130 @@
   </ion-header>
 
   <ion-item id="chat-tabs" class="ion-margin-top ion-margin-bottom">
-    <ion-tabs>
-      <ion-tab-bar slot="top">
-        <ion-tab-button tab="Friends">
-          Friends
-        </ion-tab-button>
-        <ion-tab-button tab="Groups">
-          Groups
-        </ion-tab-button>
-        <ion-tab-button tab="Communities">
-          Communities
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-tab-button (click)="showContent('Friends')">Friends</ion-tab-button>
+    <ion-tab-button (click)="showContent('Groups')">Groups</ion-tab-button>
+    <ion-tab-button (click)="showContent('Communities')">Communities</ion-tab-button>
   </ion-item>
 
-  <ion-item>
-    <ion-avatar class="chat-profile" slot="start">
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>
-      <ion-label>@JanneDoe</ion-label>
-      <p>
-        <ion-text>
-          Latest message
+  <!-- Content for Friends tab -->
+  <div *ngIf="selectedTab === 'Friends'">
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>@JanneDoe</ion-label>
+        <p>
+          <ion-text>
+            Latest message
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>11:45</p>
+          <p class="number-of-messages">1</p>
         </ion-text>
-      </p>
-      </ion-label>
-      <ion-text class="ion-text-center" slot="end" color="medium">
-        <p>11:45</p>
-        <p class="number-of-messages">1</p>
-      </ion-text>
-  </ion-item>
+    </ion-item>
+    
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>@JanneDoe</ion-label>
+        <p>
+          <ion-text>
+            Latest message
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>11:45</p>
+          <p class="number-of-messages">99</p>
+        </ion-text>
+    </ion-item>
   
-  <ion-item>
-    <ion-avatar class="chat-profile" slot="start">
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>
-      <ion-label>@JanneDoe</ion-label>
-      <p>
-        <ion-text>
-          Latest message
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>@JohnDoe</ion-label>
+        <p>
+          <ion-text>
+            Hello world
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>01:30</p>
+          <p class="number-of-messages-none"></p>
         </ion-text>
-      </p>
-      </ion-label>
-      <ion-text class="ion-text-center" slot="end" color="medium">
-        <p>11:45</p>
-        <p class="number-of-messages">99</p>
-      </ion-text>
-  </ion-item>
+    </ion-item>
+  </div>
 
-  <ion-item>
-    <ion-avatar class="chat-profile" slot="start">
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>
-      <ion-label>@JohnDoe</ion-label>
-      <p>
-        <ion-text>
-          Hello world
+  <!-- Content for Groups tab -->
+  <div *ngIf="selectedTab === 'Groups'">
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>@Timmie, @Jimmy, @Nicolas</ion-label>
+        <p>
+          <ion-text>
+            @Jimmy: Dette er en test for at se om hvis chat virker
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>11:45</p>
+          <p class="number-of-messages">1</p>
         </ion-text>
-      </p>
-      </ion-label>
-      <ion-text class="ion-text-center" slot="end" color="medium">
-        <p>01:30</p>
-        <p class="number-of-messages-none"></p>
-      </ion-text>
-  </ion-item>
+    </ion-item>
+    
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>Social Vibes</ion-label>
+        <p>
+          <ion-text>
+            @Vidar: Captain Social Vibes returns!!!
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>11:45</p>
+          <p class="number-of-messages">99</p>
+        </ion-text>
+    </ion-item>
+  
+    <ion-item>
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>The Boys</ion-label>
+        <p>
+          <ion-text>
+            @Jared: Guys is femboy gay, asking for a friend
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>01:30</p>
+          <p class="number-of-messages-none"></p>
+        </ion-text>
+    </ion-item>
+  </div>
+
+  <!-- Content for Communities tab -->
+  <div *ngIf="selectedTab === 'Communities'">
+    <!-- Insert your Communities content here -->
+  </div>
+  
 
   
 </ion-content>
