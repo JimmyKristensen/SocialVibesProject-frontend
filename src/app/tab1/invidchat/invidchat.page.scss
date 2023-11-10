@@ -43,4 +43,12 @@
     background-color: transparent;
     border: 1px solid #007bff;
   }
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-content ion-back-button {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
   
