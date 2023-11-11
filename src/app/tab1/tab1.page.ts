@@ -15,6 +15,6 @@ export class Tab1Page {
   }
 
   invidChat() {
-    this.router.navigate(['./invidChat']);
+    this.router.navigate(['invidChat']);
   }
 }

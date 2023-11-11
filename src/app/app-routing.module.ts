@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: "invidchat",
+    path: "invidChat",
     loadChildren: () => import('./tab1/invidchat/invidchat.module').then( m => m.InvidchatPageModule)
   }
 ];
