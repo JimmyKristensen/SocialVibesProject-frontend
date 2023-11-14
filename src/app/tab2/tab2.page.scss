@@ -1,0 +1,45 @@
+.background-container {
+    background-color: #f0f0f0;
+    height: 20%; 
+    display: static;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-picture-container {
+    width: 100px; 
+    height: 100px; 
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden; /* Hide content outside the circular container */
+  }
+  
+  .profile-picture {
+    width: 100%;
+    height: auto;
+  }
+  
+  .profile-name {
+    padding-left: 5px;
+    font-size: large;
+    border-radius: 10px;
+    margin-top: 10px;
+    outline-color: aqua;
+    color: white;
+  }
+  .new-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .button1,
+  .button2,
+  .button3 {
+    width: 30%;
+  }
+  
+  .info-container{
+    text-align: center;
+  }

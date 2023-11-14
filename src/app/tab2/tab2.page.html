@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="background-container">
+    <div class="profile-picture-container">
+      <ion-img class="profile-picture" src="assets/img/profilePic.png" alt="Profile Picture"></ion-img>
+    </div>
+  </div>
+  <div class="profile-name">
+    <ion-label>John Doe</ion-label>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="info-container">
+    <ion-label>Friends: 4</ion-label>
+    <ion-label> | </ion-label>
+    <ion-label>Activities: 10</ion-label>
+  </div>
+
+  <div class="new-buttons">
+    <ion-button class="button1" expand="full">Edit Profile</ion-button>
+    <ion-button class="button2" expand="full">Message</ion-button>
+    <ion-button class="button3" expand="full">Invite</ion-button>
+  </div>
+
+  <ion-item id="chat-tabs" class="ion-margin-top ion-margin-bottom">
+    <ion-tabs>
+      <ion-tab-bar slot="top">
+        <ion-tab-button tab="post">
+          Post
+        </ion-tab-button>
+        <ion-tab-button tab="private-Post">
+          Private Post
+        </ion-tab-button>
+        <ion-tab-button tab="stats">
+          Stats
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-item>
+
+  
 </ion-content>
