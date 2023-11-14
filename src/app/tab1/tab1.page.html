@@ -3,7 +3,8 @@
     <ion-title>
       Chat / Social
     </ion-title>
-    <ion-icon slot="end" name="notifications-outline" class="notification-bell"></ion-icon>
+    <ion-icon slot="end" name="add-outline" id="open-modal" expand="block" class="icons"></ion-icon>
+    <ion-icon slot="end" name="notifications-outline" class="icons"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +20,45 @@
     <ion-tab-button (click)="showContent('Groups')">Groups</ion-tab-button>
     <ion-tab-button (click)="showContent('Communities')">Communities</ion-tab-button>
   </ion-item>
+  
+  
+  <!--Create chat modal-->
+  <ion-modal class="modal-size" trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-icon class="icons" slot="end" name="close-outline" (click)="cancel()"></ion-icon>
+          </ion-buttons>
+          <ion-title>Start a chat</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content id="height" class="ion-padding">
+        <ion-searchbar></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let item of items; let index">
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />s
+            </ion-avatar>
+            <ion-checkbox alignment="end"> {{item}}</ion-checkbox>
+          </ion-item>
+        </ion-list>
 
+        <ion-infinite-scroll threshold="550px" (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-content>
+      <ion-footer>
+        <ion-grid>
+          <ion-row>
+            <ion-col offset="8" offset-md="5" offset-lg="1">
+              <ion-button shape="round">Create</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
   <!-- Content for Friends tab -->
   <div *ngIf="selectedTab === 'Friends'">
     <ion-item (click)="invidChat()">
