@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 //Chat variable
 interface Chat {
  id: number;
- memberIds: number[];
+ chatsrooms: [];
+ members: [];
  numberOfMessages: number;
+
  latestMessage: Date;
 }
 
