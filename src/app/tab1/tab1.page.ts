@@ -1,20 +1,37 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { InvidCallService } from '../calls/invid-call.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+ selector: 'app-tab1',
+ templateUrl: 'tab1.page.html',
+ styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  selectedTab: string = 'Friends'; // Default to Friends tab
-  constructor(private router: Router) {}
+ selectedTab: string = 'Friends'; // Default to Friends tab
+ constructor(private router: Router, private invidCallService: InvidCallService) {}
 
-  showContent(tab: string) {
-    this.selectedTab = tab;
-  }
+ chats: {
+     id: number,
+     numberMembers: number,
+     time: string,
+     numberOfMessages: number,
+     latestMessage: Date,
+     Type: string,
+   }[] = [];
 
-  invidChat() {
-    this.router.navigate(['invidChat']);
-  }
+ showContent(tab: string) {
+   this.selectedTab = tab;
+ }
+
+ invidChat() {
+   this.router.navigate(['invidChat']);
+ }
+
+ fetchData() {
+   this.invidCallService.getData().subscribe(data => {
+     
+    //this.chats = data;
+   });
+ }
 }
