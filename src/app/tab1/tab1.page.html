@@ -15,11 +15,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item id="chat-tabs" class="ion-margin-top ion-margin-bottom">
-    <ion-tab-button (click)="showContent('Friends')">Friends</ion-tab-button>
-    <ion-tab-button (click)="showContent('Groups')">Groups</ion-tab-button>
-    <ion-tab-button (click)="showContent('Communities')">Communities</ion-tab-button>
-  </ion-item>
+  <ion-segment id="chat-tabs"  value="default">
+    <ion-segment-button (click)="showContent('Friends')" value="Friends">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="showContent('Groups')" value="Groups">
+      <ion-label>Groups</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="showContent('Communities')" value="Communities">
+      <ion-label>Communities</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   
   
   <!--Create chat modal-->
@@ -160,7 +166,7 @@
         <ion-label>The Boys</ion-label>
         <p>
           <ion-text>
-            @Jared: Guys is femboy gay, asking for a friend
+            @Jared: Guys gyus i need help with something
           </ion-text>
         </p>
         </ion-label>
