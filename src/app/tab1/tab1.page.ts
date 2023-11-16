@@ -16,7 +16,7 @@ export class Tab1Page implements OnInit {
   items : String[] = [];
 
   ngOnInit() {
-    for (let i = 1; i < 51; i++) {
+    for (let i = 1; i < 20; i++) {
       this.items.push(`Item ${i}`);
     }
   }
@@ -26,12 +26,15 @@ export class Tab1Page implements OnInit {
       this.items.push(`Item ${count + i}`);
     }
   }
+
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
     this.generateItems();
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
   }
+
+  //Modal
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
@@ -39,13 +42,15 @@ export class Tab1Page implements OnInit {
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
-
+  
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       this.message = `Hello, ${ev.detail.data}!`;
     }
   }
+  //Modal end
+
   selectedTab: string = 'Friends'; // Default to Friends tab
   constructor(private router: Router) {}
 
