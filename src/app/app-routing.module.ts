@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'groupchat',
-    loadChildren: () => import('./groupchat/groupchat.module').then( m => m.GroupchatPageModule)
+    path: "invidChat",
+    loadChildren: () => import('./tab1/invidchat/invidchat.module').then( m => m.InvidchatPageModule)
   }
 
 ];

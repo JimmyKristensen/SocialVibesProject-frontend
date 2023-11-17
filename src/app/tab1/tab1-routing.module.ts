@@ -13,15 +13,15 @@ const routes: Routes = [
   {
   path: 'Friends',
   component: FriendsComponent,
-},
-{
-  path: 'Groups',
-  component: GroupsComponent,
-},
-{
-  path: 'Communities',
-  component: CommunitiesComponent,
-},
+  },
+  {
+    path: 'Groups',
+    component: GroupsComponent,
+  },
+  {
+    path: 'Communities',
+    component: CommunitiesComponent,
+  }
 ];
 
 @NgModule({
