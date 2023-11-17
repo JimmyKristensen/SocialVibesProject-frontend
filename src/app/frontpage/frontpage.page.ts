@@ -11,7 +11,9 @@ export class FrontpagePage {
   constructor(private router: Router, private invidCallService: InvidCallService) {}
 
   login() {
-    this.fetchData
+    console.log("Calling Fetch")
+    this.fetchData();
+    console.log("Logging in")
     this.router.navigate(['./tabs']);
   }
   fetchData() {
