@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab1',
@@ -52,7 +53,7 @@ export class Tab1Page implements OnInit {
   //Modal end
 
   selectedTab: string = 'Friends'; // Default to Friends tab
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   showContent(tab: string) {
     this.selectedTab = tab;
@@ -60,5 +61,17 @@ export class Tab1Page implements OnInit {
 
   invidChat() {
     this.router.navigate(['invidChat']);
+  }
+
+  createChat(){
+    this.http.post('https://jsonplaceholder.typicode.com/posts', {
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      })
+    }).subscribe((res) => {
+      console.log(res);
+    })
   }
 }
