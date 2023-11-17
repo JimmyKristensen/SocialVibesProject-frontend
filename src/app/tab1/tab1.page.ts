@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InvidCallService } from '../calls/invid-call.service';
 
+
 @Component({
  selector: 'app-tab1',
  templateUrl: 'tab1.page.html',
@@ -9,16 +10,9 @@ import { InvidCallService } from '../calls/invid-call.service';
 })
 export class Tab1Page {
  selectedTab: string = 'Friends'; // Default to Friends tab
- constructor(private router: Router, private invidCallService: InvidCallService) {}
+ constructor(private router: Router) {}
 
- chats: {
-     id: number,
-     numberMembers: number,
-     time: string,
-     numberOfMessages: number,
-     latestMessage: Date,
-     Type: string,
-   }[] = [];
+
 
  showContent(tab: string) {
    this.selectedTab = tab;
@@ -26,12 +20,8 @@ export class Tab1Page {
 
  invidChat() {
    this.router.navigate(['invidChat']);
+
  }
 
- fetchData() {
-   this.invidCallService.getData().subscribe(data => {
-     
-    //this.chats = data;
-   });
- }
+
 }
