@@ -4,6 +4,12 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
+
+interface ParticipantsInterface {
+  name: string;
+  checked: boolean;
+}
 
 @Component({
   selector: 'app-tab1',
@@ -20,6 +26,7 @@ export class Tab1Page implements OnInit {
     for (let i = 1; i < 20; i++) {
       this.items.push(`Item ${i}`);
     }
+
   }
   private generateItems() {
     const count = this.items.length + 1;
@@ -63,15 +70,23 @@ export class Tab1Page implements OnInit {
     this.router.navigate(['invidChat']);
   }
 
+  participants: ParticipantsInterface[] = [];
+
+
+
+  createChatData = new FormGroup({
+    "test": new FormControl(null)
+  })
+
+  
+
   createChat(){
-    this.http.post('https://jsonplaceholder.typicode.com/posts', {
-      body: JSON.stringify({
-        title: 'foo',
-        body: 'bar',
-        userId: 1,
-      })
-    }).subscribe((res) => {
+    /*
+    this.http.post<posts>('https://jsonplaceholder.typicode.com/posts', chat)
+    .subscribe((res) => {
       console.log(res);
     })
+    */
+    
   }
 }
