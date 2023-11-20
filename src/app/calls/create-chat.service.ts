@@ -32,16 +32,5 @@ export class CreateChatService {
 
   constructor(private http: HttpClient) {}
   
-  /*
-  "Chatrooms": {
-    "-NjRnEvNpSpQM3CtYPRA": {
-      "Admin": {
-        "Name": "Nicolas",
-        "TimeStamp": "2023-11-16  15-07-53",
-        "id": "-NjNSQ17ewaStdPzImu6"
-      },
-      "TimeStamp": "2023-11-17  11-21-44",
-      "Title": "Test Chatroom"
-    }
-    */
+  
 }
