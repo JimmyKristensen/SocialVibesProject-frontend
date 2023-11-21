@@ -3,8 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyD3sU4ZVbl4Zz_qv6Az9xd-hN-u5YIT2w8",
+    authDomain: "social-vibes-4d1d6.firebaseapp.com",
+    databaseURL: "https://social-vibes-4d1d6-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "social-vibes-4d1d6",
+    storageBucket: "social-vibes-4d1d6.appspot.com",
+    messagingSenderId: "395965872256",
+    appId: "1:395965872256:web:4bc43c431101a919ef4e65",
+    measurementId: "G-9N3FTZG85S"
+  }
+ };
 
 /*
  * For easier debugging in development mode, you can import the following file

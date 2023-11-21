@@ -27,7 +27,7 @@ interface Chat {
    }
 
 //Test Data
-/*let testData: Chat = {
+let testData: Chat = {
     "Chatroom Participants": {
       "-NjRailphl3e61nbXJEF": [
         {
@@ -65,7 +65,7 @@ interface Chat {
       }
     }
    };
-*/
+
 @Injectable({
  providedIn: 'root'
 })
@@ -75,8 +75,15 @@ export class InvidCallService {
 
  //Api Return
  getInvidChats(): Observable<any> {
-  return this.http.get('https://social-vibes-4d1d6-default-rtdb.europe-west1.firebasedatabase.app').pipe(
+    console.log(testData)
+    
+    this.http.get('https://social-vibes-4d1d6-default-rtdb.europe-west1.firebasedatabase.app').pipe(
     tap(data => console.log('This is the data: ', data))
-  );
+    ).subscribe();
+    return of(testData)
+    
+    /*return this.http.get('https://social-vibes-4d1d6-default-rtdb.europe-west1.firebasedatabase.app').pipe(
+    tap(data => console.log('This is the data: ', data))
+  );*/
  }
 }
