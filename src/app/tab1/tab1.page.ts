@@ -1,3 +1,4 @@
+// tab1.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,12 +21,12 @@ export class Tab1Page implements OnInit {
     this.router.navigate(['invidChat']);
   }
 
-ngOnInit() {
-  this.route.queryParams.subscribe(params => {
-    const dataParam = params['invidChatsData'];
-    this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
-    console.log("Test data received: " + this.invidChatsData);
-  });
-}
-
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const dataParam = params['invidChatsData'];
+      this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
+      console.log("Test data received: ", this.invidChatsData);
+    });
+  }
+  
 }
