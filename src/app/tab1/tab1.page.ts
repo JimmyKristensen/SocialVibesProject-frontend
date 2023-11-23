@@ -3,13 +3,19 @@ import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup} from '@angular/forms';
+import { CreateChatService } from '../calls/create-chat.service';
 
-interface ParticipantsInterface {
+interface ProfileInterface {
   id: string;
   name: string;
   isChecked: boolean;
+}
+interface ParticipantsInterface {
+  Participants: string[];
+  Admin: string;
+  Title: string;
 }
 
 @Component({
@@ -19,17 +25,24 @@ interface ParticipantsInterface {
 })
 export class Tab1Page implements OnInit {
   @ViewChild(IonModal) modal: IonModal | any;
+
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string | any;
   //items : String[] = [];
-  usersList: ParticipantsInterface[] = [
-    {id:"NjNSO0NQgtX8QnAAYWz", name: "Jimmy", isChecked: false},
-    {id:"NjNSQ17ewaStdPzImu6", name: "Nicolas", isChecked: false},
-    {id:"NjNSRG1UK-t6UQ-tsb6", name: "Timmie", isChecked: false}
+
+  usersList: ProfileInterface[] = [
+    {id:"-NjNSO0NQgtX8QnAAYWz", name: "Jimmy", isChecked: false},
+    {id:"-NjNSQ17ewaStdPzImu6", name: "Nicolas", isChecked: false},
+    {id:"-NjNSRG1UK-t6UQ-tsb6", name: "Timmie", isChecked: false}
   ];
 
-  participantsList: ParticipantsInterface[] = []
+  createChatData = new FormGroup({})
+  usersToAddToChatList: ProfileInterface[] = []
 
+
+
+  selectedTab: string = 'Friends'; // Default to Friends tab
+  constructor(private router: Router, private http: HttpClient, private createChatService: CreateChatService) {}
   
 
   ngOnInit() {
@@ -56,6 +69,10 @@ export class Tab1Page implements OnInit {
 
   //Modal
   cancel() {
+    this.usersToAddToChatList.forEach(function(user) {
+      user.isChecked = false
+    })
+    this.usersToAddToChatList = []
     this.modal.dismiss(null, 'cancel');
   }
 
@@ -71,8 +88,6 @@ export class Tab1Page implements OnInit {
   }
   //Modal end
 
-  selectedTab: string = 'Friends'; // Default to Friends tab
-  constructor(private router: Router, private http: HttpClient) {}
 
   showContent(tab: string) {
     this.selectedTab = tab;
@@ -82,34 +97,49 @@ export class Tab1Page implements OnInit {
     this.router.navigate(['invidChat']);
   }
 
-  getSelectedBox(addProfileToChat : ParticipantsInterface){
+  getSelectedBox(addProfileToChat : ProfileInterface){
     if(addProfileToChat.isChecked === false){
-      this.participantsList.push(addProfileToChat)
+      this.usersToAddToChatList.push(addProfileToChat)
       addProfileToChat.isChecked = true
     } else {
-      let index = this.participantsList.findIndex(profile => profile.id === addProfileToChat.id)
+      let index = this.usersToAddToChatList.findIndex(profile => profile.id === addProfileToChat.id)
       if (index > -1) {
-        this.participantsList.splice(index, 1);
+        this.usersToAddToChatList.splice(index, 1);
        }
       addProfileToChat.isChecked = false
     }
-    console.log(this.participantsList)
+    console.log(this.usersToAddToChatList)
   }
 
- 
-  
-  createChatData = new FormGroup({})
-
-  
-
   createChat(){
+    let participantsArray: string[] = []
+    this.usersToAddToChatList.forEach(function(user){
+      participantsArray.push(user.id)
+    })
+    let admin: string = this.usersToAddToChatList[0].id
+    let title: string = this.usersToAddToChatList[0].name
+    let participantsToSend: ParticipantsInterface
+    participantsToSend = {
+      Participants: participantsArray,
+      Admin: admin,
+      Title: title
+    }
+
     /*
-    this.http.post<posts>('https://jsonplaceholder.typicode.com/posts', chat)
-    .subscribe((res) => {
-      console.log(res);
+    this.createChatService
+    .addChatRoom(participantsToSend)
+    .subscribe((data) => {
+      console.log(data);
     })
     */
-    console.log(this.participantsList)
+   
+    
+    this.http.post('http://127.0.0.1:5000/chatroom/create-chat', participantsToSend)
+    .subscribe((res) => {
+      console.log(res)
+    })
+
+
     
   }
 }
