@@ -24,10 +24,11 @@ export class FrontpagePage {
   }
 
   fetchData() {
-    this.invidService.getInvidChats().subscribe(data => {
+    this.invidCallService.getInvidChats().subscribe(data => {
       console.log('Test data given: ', data);
       this.router.navigate(['./tabs/tab1'], { queryParams: { invidChatsData: JSON.stringify(data) } });
     });
-  }
+
   
+}
 }

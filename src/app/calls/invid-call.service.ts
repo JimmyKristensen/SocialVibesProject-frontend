@@ -10,7 +10,7 @@ export class InvidCallService {
   constructor(private http: HttpClient) { }
 
   getInvidChats(): Observable<any> {
-    return this.http.get('https://social-vibes-4d1d6-default-rtdb.europe-west1.firebasedatabase.app').pipe(
+    return this.http.get('http://127.0.0.1:5000/chatroom/-NjNSRG1UK-t6UQ-tsb6/user-get').pipe(
       tap(data => console.log('This is the data: ', data))
     );
   }
