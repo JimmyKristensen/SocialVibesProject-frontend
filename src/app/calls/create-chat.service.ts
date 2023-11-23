@@ -22,14 +22,13 @@ export class CreateChatService {
 
   constructor(private http: HttpClient) {}
   
-  addChatRoom(participants : ParticipantsInterface): Observable<ParticipantsInterface>{
+  addChatRoom(participants : ParticipantsInterface){
     console.log(this.URLForApi)
     console.log(participants)
     console.log(this.httpHeader)
     console.log(this.http.post<ParticipantsInterface>(this.URLForApi, participants))
-    return this.http.post<ParticipantsInterface>(this.URLForApi, participants)
-    .pipe(catchError(this.handleError('addHero', participants))
-  );
+    return this.http.post<ParticipantsInterface>(this.URLForApi, participants, this.httpHeader)
+
   }
   handleError(arg0: string, participants: ParticipantsInterface): (err: any, caught: Observable<ParticipantsInterface>) => import("rxjs").ObservableInput<any> {
     throw new Error('Method not implemented.');
