@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError} from 'rxjs';
+import { ParticipantsInterface } from '../interfaces/participants-interface';
 
 
-interface ParticipantsInterface {
-  Participants: string[];
-  Admin: string;
-  Title: string;
-}
 @Injectable({
   providedIn: 'root'
 })
-export class CreateChatService {
+export class PostChatService {
   URLForApi: string = 'http://127.0.0.1:5000/chatroom/create-chat';
   httpHeader = {
     headers: new HttpHeaders({
@@ -28,10 +23,6 @@ export class CreateChatService {
     console.log(this.httpHeader)
     console.log(this.http.post<ParticipantsInterface>(this.URLForApi, participants))
     return this.http.post<ParticipantsInterface>(this.URLForApi, participants, this.httpHeader)
+  }
 
-  }
-  handleError(arg0: string, participants: ParticipantsInterface): (err: any, caught: Observable<ParticipantsInterface>) => import("rxjs").ObservableInput<any> {
-    throw new Error('Method not implemented.');
-  }
-  
 }
