@@ -83,7 +83,7 @@ export class Tab1Page implements OnInit {
   }
 
   getSelectedBox(addProfileToChat : ProfileInterface){
-    this.createChatService.getSelectedToArray(addProfileToChat)
+    this.createChatService.addSelectedToArray(addProfileToChat)
   }
 
   createChat(){

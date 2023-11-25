@@ -25,7 +25,7 @@ export class CreateChatService {
     usersToAddToChatList = [mockLoggedInUser]
   }
 
-  getSelectedToArray(addProfileToChat : ProfileInterface){
+  addSelectedToArray(addProfileToChat : ProfileInterface){
     //Recive an obeject from the hmtl form with the selected profile
     // If seleted user's status, the status is used to check if the user has been selected and added to the array
     if(addProfileToChat.isChecked === false){
