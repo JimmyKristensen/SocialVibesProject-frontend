@@ -94,7 +94,8 @@ export class Tab1Page implements OnInit {
 invidChat(chatroom: any) {
   console.log('The chatroom value:', chatroom);
   if (chatroom && chatroom.chatroom_data && chatroom.chatroom_data.Chatroom) {
-    const chatroomId = chatroom.chatroom_data.Chatroom.id;
+    const chatroomId = chatroom?.chatroom_data?.Chatroom?.Admin?.id;
+
     console.log('Navigating to chatroom with the ID:', chatroomId);
 
     if (chatroomId) {
