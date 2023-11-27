@@ -124,6 +124,28 @@
           <p class="number-of-messages-none"></p>
         </ion-text>
     </ion-item>
+
+
+    <ion-item *ngFor="let chatroom of (chatroomsData | async)">
+
+      <ion-avatar class="chat-profile" slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>
+        <ion-label>@{{ chatroom?.chatroom_data?.Chatroom?.Title }}</ion-label>
+        <p>
+          <ion-text>
+            Hello i am real person yes yes skibidi
+          </ion-text>
+        </p>
+        </ion-label>
+        <ion-text class="ion-text-center" slot="end" color="medium">
+          <p>01:30</p>
+          <p class="number-of-messages-none"></p>
+        </ion-text>
+    </ion-item>
+    
+
   </div>
 
   <!-- Content for Groups tab -->

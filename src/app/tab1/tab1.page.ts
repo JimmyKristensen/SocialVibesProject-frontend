@@ -1,5 +1,8 @@
-import { Component, ViewChild, OnInit  } from '@angular/core';
-import { Router } from '@angular/router';
+// tab1.page.ts
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChatroomCallsService } from '../calls/chatroom-calls.service';
+import { Observable } from 'rxjs';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
@@ -30,13 +33,23 @@ export class Tab1Page implements OnInit {
   createChatData = new FormGroup({})
 
   selectedTab: string = 'Friends'; // Default to Friends tab
-  constructor(private router: Router, private createChatService: CreateChatService) {}
+  chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
+  invidChatsData: any;
+
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute,
+    private createChatService: CreateChatService,
+    private chatroomInvidCall: ChatroomCallsService // Get all chatrooms for a user
+    ) {}
   
 
   ngOnInit() {
-    for (let i = 1; i < 20; i++) {
-      //this.items.push(`Item ${i}`);
-    }
+    this.route.queryParams.subscribe(params => {
+      const dataParam = params['invidChatsData'];
+      this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
+    });
+    this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData)
 
   }
   private generateItems() {
