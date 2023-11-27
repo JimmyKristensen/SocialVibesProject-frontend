@@ -26,7 +26,7 @@ export class CreateChatService {
   }
 
   addSelectedToArray(addProfileToChat : ProfileInterface){
-    //Recive an obeject from the hmtl form with the selected profile
+    // Recive an obeject from the hmtl form with the selected profile
     // If seleted user's status, the status is used to check if the user has been selected and added to the array
     if(addProfileToChat.isChecked === false){
       // If false add the selected to usersToAddToChatList array

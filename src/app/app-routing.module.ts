@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { GroupsModule } from './tab1/groups/groups.module';
 
 const routes: Routes = [
  {
@@ -13,13 +12,12 @@ const routes: Routes = [
   },
   {
     path: "invidChat",
-    loadChildren: () => import('./tab1/invidchat/invidchat.module').then( m => m.InvidchatPageModule)
+    loadChildren: () => import('./invidchat/invidchat.module').then( m => m.InvidchatPageModule)
   }
 
 ];
 @NgModule({
   imports: [
-    GroupsModule,
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
