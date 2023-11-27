@@ -3,7 +3,8 @@
     <ion-title>
       Chat / Social
     </ion-title>
-    <ion-icon slot="end" name="notifications-outline" class="notification-bell"></ion-icon>
+    <ion-icon slot="end" name="add-outline" id="open-modal" expand="block" class="icons"></ion-icon>
+    <ion-icon slot="end" name="notifications-outline" class="icons"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -14,12 +15,60 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item id="chat-tabs" class="ion-margin-top ion-margin-bottom">
-    <ion-tab-button (click)="showContent('Friends')">Friends</ion-tab-button>
-    <ion-tab-button (click)="showContent('Groups')">Groups</ion-tab-button>
-    <ion-tab-button (click)="showContent('Communities')">Communities</ion-tab-button>
-  </ion-item>
+  <ion-segment id="chat-tabs"  value="default">
+    <ion-segment-button (click)="showContent('Friends')" value="Friends">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="showContent('Groups')" value="Groups">
+      <ion-label>Groups</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="showContent('Communities')" value="Communities">
+      <ion-label>Communities</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  
+  <!--Create chat modal-->
+  <ion-modal class="modal-size" trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <form [formGroup]="createChatData">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-icon class="icons" slot="end" name="close-outline" (click)="cancel()"></ion-icon>
+          </ion-buttons>
+          <ion-title>Start a chat</ion-title>
+        </ion-toolbar>
+        <ion-toolbar>
+          <ion-searchbar></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-input></ion-input>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <div *ngFor="let entry of usersList; let index">
+          <ion-item >
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar"/>
+            </ion-avatar>
+            <ion-checkbox alignment="end" (click)="getSelectedBox(entry)"> {{entry.name}}</ion-checkbox>
+          </ion-item>
+          </div>
+        </ion-list>
+        
 
+        <ion-infinite-scroll threshold="550px" (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-button type="submit" slot="end" shape="round" (click)="createChat()">Create</ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+    </form>
+  </ion-modal>
   <!-- Content for Friends tab -->
   <div *ngIf="selectedTab === 'Friends'">
     <ion-item (click)="invidChat()">
@@ -145,7 +194,7 @@
         <ion-label>The Boys</ion-label>
         <p>
           <ion-text>
-            @Jared: Guys is femboy gay, asking for a friend
+            @Jared: Guys gyus i need help with something
           </ion-text>
         </p>
         </ion-label>

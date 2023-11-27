@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InvidchatPage } from './invidchat.page';
+import { GroupchatPage } from './groupchat.page';
 
-describe('InvidchatPage', () => {
-  let component: InvidchatPage;
-  let fixture: ComponentFixture<InvidchatPage>;
+describe('GroupchatPage', () => {
+  let component: GroupchatPage;
+  let fixture: ComponentFixture<GroupchatPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(InvidchatPage);
+    fixture = TestBed.createComponent(GroupchatPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -15,7 +15,7 @@ describe('InvidchatPage', () => {
     expect(component).toBeTruthy();
   });
 });
-
 function async(arg0: () => void): jasmine.ImplementationCallback {
   throw new Error('Function not implemented.');
 }
+

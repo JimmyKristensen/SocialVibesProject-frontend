@@ -15,6 +15,7 @@ const routes: Routes = [
     path: "invidChat",
     loadChildren: () => import('./tab1/invidchat/invidchat.module').then( m => m.InvidchatPageModule)
   }
+
 ];
 @NgModule({
   imports: [

@@ -4,6 +4,7 @@ import { Tab1Page } from './tab1.page';
 import { GroupsComponent } from './groups/groups.component';
 import { FriendsComponent } from './friends/friends.component';
 import { CommunitiesComponent } from './communities/communities.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,7 +26,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    ],
+  exports: [RouterModule,ReactiveFormsModule,FormsModule]
 })
 export class Tab1PageRoutingModule {}
