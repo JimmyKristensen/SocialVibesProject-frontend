@@ -49,7 +49,7 @@
           <div *ngFor="let entry of usersList; let index">
           <ion-item >
             <ion-avatar slot="start">
-              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar"/>
+              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar"/>
             </ion-avatar>
             <ion-checkbox alignment="end" (click)="getSelectedBox(entry)"> {{entry.name}}</ion-checkbox>
           </ion-item>
