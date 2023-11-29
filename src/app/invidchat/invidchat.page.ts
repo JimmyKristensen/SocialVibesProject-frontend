@@ -7,17 +7,20 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./invidchat.page.scss'],
 })
 export class InvidchatPage implements OnInit {
+  messages: any;
 
   constructor(private route: ActivatedRoute) { }
 
 
+  
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const chatroomId = params.get('id');
-      console.log('Chatroom ID:', chatroomId);
-      // Now you can use chatroomId as needed
+    this.route.queryParams.subscribe(params => {
+      const dataParam = params['messages'];
+      this.messages = dataParam ? JSON.parse(dataParam) : [];
+  
+      console.log('Received messages:', this.messages);
     });
-  }
   
 
+}
 }

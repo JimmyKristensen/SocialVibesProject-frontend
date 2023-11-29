@@ -91,18 +91,20 @@ export class Tab1Page implements OnInit {
     this.selectedTab = tab;
   }
 
-invidChat(chatroom: any) {
-  console.log('The chatroom value:', chatroom);
-  if (chatroom && chatroom.chatroom_data && chatroom.chatroom_data.Chatroom) {
-    const chatroomId = chatroom?.chatroom_data?.Chatroom?.Admin?.id;
-
-    console.log('Navigating to chatroom with the ID:', chatroomId);
-
-    if (chatroomId) {
-      this.router.navigate(['/invidChat', chatroomId]);
+  invidChat(chatroom: any) {
+    console.log('The chatroom value:', chatroom);
+    if (chatroom && chatroom.chatroom_data && chatroom.chatroom_data.Messages) {
+      const messages = Object.values(chatroom?.chatroom_data?.Messages || {});
+  
+      console.log('Navigating to chatroom with messages:', messages);
+  
+      if (messages.length > 0) {
+        this.router.navigate(['/invidChat'], { queryParams: { messages: JSON.stringify(messages) } });
+      }
     }
   }
-}
+  
+  
 
   getSelectedBox(addProfileToChat : ProfileInterface){
     this.createChatService.addSelectedToArray(addProfileToChat)
