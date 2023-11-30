@@ -87,5 +87,10 @@ export class PostChatService {
 
   }
   
+  
+  public getMockedLoggedInUser() : ProfileInterface {
+    return this.mockLoggedInUser
+  }
+  
 
 }

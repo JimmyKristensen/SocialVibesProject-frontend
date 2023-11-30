@@ -46,6 +46,7 @@
       <ion-input></ion-input>
       <ion-content class="ion-padding">
         <ion-list>
+        
           <div *ngFor="let entry of usersList; let index">
           <ion-item >
             <ion-avatar slot="start">
@@ -55,10 +56,9 @@
           </ion-item>
           </div>
         </ion-list>
-        
-
-        <ion-infinite-scroll threshold="550px" (ionInfinite)="onIonInfinite($event)">
-          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      
+        <ion-infinite-scroll threshold="50%" (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
         </ion-infinite-scroll>
       </ion-content>
       <ion-footer>

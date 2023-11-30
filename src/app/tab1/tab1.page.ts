@@ -20,11 +20,8 @@ export class Tab1Page implements OnInit {
   @ViewChild(IonModal) modal: IonModal | any;
 
   //To simulate a get all users
-  usersList: ProfileInterface[] = [
-  {id:"-NjgoJdCMe8wjbqpLme9", name: "Hannes", isChecked: false},
-  {id:"-NjNSQ17ewaStdPzImu6", name: "Nicolas", isChecked: false},
-  {id:"-NjNSRG1UK-t6UQ-tsb6", name: "Timmie", isChecked: false}
-  ];
+  usersList: ProfileInterface[] = [];
+  lastUserId: string = ""
   userData: Observable<any[]> = new Observable();
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
@@ -54,32 +51,44 @@ export class Tab1Page implements OnInit {
       this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
     });
     this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData)
-    this.getAllUser()
+    this.getUsers("0")
   }
 
-  
-
-
-  private generateItems() {
-    /*
-    const count = this.items.length + 1;
-    for (let i = 0; i < 50; i++) {
-      this.items.push(`Item ${count + i}`);
-    }
-    */
-  }
 
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
-    this.generateItems();
+    this.getUsers(this.lastUserId)
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
+    }, 5000);
   }
 
-  getAllUser(){
-    this.getAllUsersService.getAllUsers("0").subscribe(res => {
-      
-    })
+  getUsers(theLastIDInUsersList: string){
+    if(!theLastIDInUsersList.match("0")){
+      //console.log(theLastIDInUsersList)
+      //console.log(this.usersList)
+      theLastIDInUsersList = this.lastUserId
+    }
+    this.getAllUsersService.getAllUsersForPagination(theLastIDInUsersList).subscribe(res => {
+      let profiles = res['profiles'];
+      for (let key in profiles) {
+        let name = profiles[key]['Name'];
+        let userID = key;
+        let userProfilForList: ProfileInterface
+            userProfilForList = {
+            id: userID,
+            name: name,
+            isChecked: false
+          }
+          let mockLoggedInUser = this.postChatService.getMockedLoggedInUser()
+          if(!mockLoggedInUser.id.match(userProfilForList.id)){
+            this.usersList.push(userProfilForList)
+          }
+          //console.log(userProfilForList)
+        }
+        //console.log(this.usersList)
+        this.lastUserId = this.usersList[this.usersList.length-1].id
+        //console.log(this.lastUserId)
+      })
   }
 
   //Modal
