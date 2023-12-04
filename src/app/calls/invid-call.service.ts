@@ -9,8 +9,8 @@ import { tap } from 'rxjs/operators';
 export class InvidCallService {
   constructor(private http: HttpClient) { }
 
-  getInvidChats(): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/chatroom/user-get/-NjNSRG1UK-t6UQ-tsb6').pipe(
+  getInvidChats(userID: String): Observable<any> {
+    return this.http.get('http://127.0.0.1:5000/chatroom/user-get/'+userID).pipe(
       tap(data => console.log('This is the data: ', data))
     );
   }

@@ -25,14 +25,19 @@ export class FrontpagePage {
   ) {}
 
   login() {
-    console.log('Calling Fetch');
-    this.fetchData();
-    console.log('Logging in');
-    // Do not navigate to 'tabs/tab1' here
+    // Check if a user is selected
+    if (!this.selectedUserId) {
+      console.error('No user selected!');
+      return;
+    }
+
+    console.log('Logging in with user ID:', this.selectedUserId);
+
+    this.fetchData(this.selectedUserId);
   }
 
-  fetchData() {
-    this.invidCallService.getInvidChats().subscribe((data) => {
+  fetchData(userID: string) {
+    this.invidCallService.getInvidChats(userID).subscribe((data) => {
       console.log('Test data given: ', data);
       this.router.navigate(['./tabs/tab1'], {
         queryParams: { invidChatsData: JSON.stringify(data) },
@@ -49,6 +54,6 @@ export class FrontpagePage {
 
   selectUser(userId: string) {
     console.log('Selected user ID:', userId);
-    
+    this.selectedUserId = userId;
   }
 }
