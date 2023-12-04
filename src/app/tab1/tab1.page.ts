@@ -7,8 +7,10 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { FormGroup} from '@angular/forms';
-import { CreateChatService } from '../services/create-chat.service';
-import { ProfileInterface } from '../services/create-chat.service';
+import { ProfileInterface } from '../interfaces/profile-interface';
+import { PostChatService } from '../calls/post-chat.service';
+import { GetAllUsersService } from '../calls/get-all-users.service';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -18,15 +20,12 @@ export class Tab1Page implements OnInit {
   @ViewChild(IonModal) modal: IonModal | any;
 
   //To simulate a get all users
-  usersList: ProfileInterface[] = [
-  {id:"-NjgoJdCMe8wjbqpLme9", name: "Hannes", isChecked: false},
-  {id:"-NjNSQ17ewaStdPzImu6", name: "Nicolas", isChecked: false},
-  {id:"-NjNSRG1UK-t6UQ-tsb6", name: "Timmie", isChecked: false}
-  ];
+  usersList: ProfileInterface[] = [];
+  lastUserId: string = ""
+  userData: Observable<any[]> = new Observable();
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string | any;
-  //items : String[] = [];
 
 
   //To select which form functions should be activated form
@@ -34,12 +33,14 @@ export class Tab1Page implements OnInit {
 
   selectedTab: string = 'Friends'; // Default to Friends tab
   chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
+  userDataToShow: Observable<any[]> = new Observable();
   invidChatsData: any;
 
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
-    private createChatService: CreateChatService,
+    private postChatService: PostChatService,
+    private getAllUsersService: GetAllUsersService,
     private chatroomInvidCall: ChatroomCallsService // Get all chatrooms for a user
     ) {}
   
@@ -50,33 +51,52 @@ export class Tab1Page implements OnInit {
       this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
     });
     this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData)
+    this.getUsers("0")
+  }
 
-  }
-  private generateItems() {
-    /*
-    const count = this.items.length + 1;
-    for (let i = 0; i < 50; i++) {
-      this.items.push(`Item ${count + i}`);
-    }
-    */
-  }
 
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
-    this.generateItems();
+    this.getUsers(this.lastUserId)
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
+    }, 5000);
+  }
+
+  getUsers(theLastIDInUsersList: string){
+    if(!theLastIDInUsersList.match("0")){
+      //console.log(theLastIDInUsersList)
+      //console.log(this.usersList)
+      theLastIDInUsersList = this.lastUserId
+    }
+    this.getAllUsersService.getAllUsersForPagination(theLastIDInUsersList).subscribe(res => {
+      let profiles = res['profiles'];
+      for (let key in profiles) {
+        let name = profiles[key]['Name'];
+        let userID = key;
+        let userProfilForList: ProfileInterface
+            userProfilForList = {
+            id: userID,
+            name: name,
+            isChecked: false
+          }
+          let mockLoggedInUser = this.postChatService.getMockedLoggedInUser()
+          if(!mockLoggedInUser.id.match(userProfilForList.id)){
+            this.usersList.push(userProfilForList)
+          }
+          //console.log(userProfilForList)
+        }
+        //console.log(this.usersList)
+        this.lastUserId = this.usersList[this.usersList.length-1].id
+        //console.log(this.lastUserId)
+      })
   }
 
   //Modal
   cancel() {
-    this.createChatService.removeAllFromArray()
+    this.postChatService.removeAllFromArray()
     this.modal.dismiss(null, 'cancel');
   }
 
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
-  }
   
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
@@ -107,11 +127,13 @@ export class Tab1Page implements OnInit {
   
 
   getSelectedBox(addProfileToChat : ProfileInterface){
-    this.createChatService.addSelectedToArray(addProfileToChat)
+    this.postChatService.addSelectedToArray(addProfileToChat)
   }
 
   createChat(){
-    this.createChatService.makeListOfParticipants()
+    this.postChatService.addChatRoom().subscribe((data) => {
+      console.log(data);
+    })
   }
 
 }
