@@ -16,19 +16,9 @@
   </ion-header>
 
   <div class="message-container">
-    <div class="message-received">
+    <div *ngFor="let message of messages" class="{{ message.SenderId === 'Timmie' ? 'message-sent' : 'message-received' }}">
       <div class="message-bubble">
-        Hey wanna play some amoung us?
-      </div>
-    </div>
-    <div class="message-sent">
-      <div class="message-bubble">
-        Fuck no
-      </div>
-    </div>
-    <div class="message-received">
-      <div class="message-bubble">
-        1.397.609.1 this you😳?
+        {{ message.Message }}
       </div>
     </div>
   </div>

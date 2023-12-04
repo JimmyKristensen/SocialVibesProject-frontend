@@ -14,7 +14,7 @@ export class ChatroomCallsService {
     const chatroomIds: string[] = data.chatroom_ids;
   
     const observables: Observable<any>[] = chatroomIds.map(user_id => {
-      return this.http.get('http://127.0.0.1:5000/chatroom/' + user_id + '/get').pipe(
+      return this.http.get('http://127.0.0.1:5000/chatroom/get/' + user_id).pipe(
         tap((chatroomData: any) => {
           console.log('Chatroom data for user_id ' + user_id + ': ', chatroomData);
         })
