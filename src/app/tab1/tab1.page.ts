@@ -31,6 +31,10 @@ export class Tab1Page implements OnInit {
   //To select which form functions should be activated form
   createChatData = new FormGroup({})
 
+  invidChats: Observable<any[]> = new Observable();
+  groupChats: Observable<any[]> = new Observable();
+
+
   selectedTab: string = 'Friends'; // Default to Friends tab
   chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
   userDataToShow: Observable<any[]> = new Observable();
