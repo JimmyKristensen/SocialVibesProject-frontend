@@ -49,15 +49,30 @@ export class Tab1Page implements OnInit {
     ) {}
   
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const dataParam = params['invidChatsData'];
-      this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
-    });
-    this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData)
-    this.getUsers("0")
-  }
+    ngOnInit() {
+      this.route.queryParams.subscribe(params => {
+        const dataParam = params['invidChatsData'];
+        this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
+      });
+    
+      this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData);
+    
+      this.chatroomsData.subscribe(
+        chatrooms => {
+          console.log('All chatrooms:', chatrooms);
+          // Additional logic with chatroomsData if needed
+        },
+        error => {
+          console.error('Error retrieving chatrooms:', error);
+          // Handle error if necessary
+        }
+      );
+    
+      this.getUsers("0");
+    }
+    
 
+  
 
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
     this.getUsers(this.lastUserId)
