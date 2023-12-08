@@ -40,7 +40,7 @@ export class FrontpagePage {
     this.invidCallService.getInvidChats(userID).subscribe((data) => {
       console.log('Test data given: ', data);
       this.router.navigate(['./tabs/tab1'], {
-        queryParams: { invidChatsData: JSON.stringify(data) },
+        queryParams: { userID: userID },
       });
     });
   }

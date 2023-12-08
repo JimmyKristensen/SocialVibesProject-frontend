@@ -10,6 +10,8 @@ import { FormGroup} from '@angular/forms';
 import { ProfileInterface } from '../interfaces/profile-interface';
 import { PostChatService } from '../calls/post-chat.service';
 import { GetAllUsersService } from '../calls/get-all-users.service';
+import { InvidCallService } from '../calls/invid-call.service';
+import { MessageCallsService } from '../calls/message-calls.service';
 
 @Component({
   selector: 'app-tab1',
@@ -24,6 +26,7 @@ export class Tab1Page implements OnInit {
   lastUserId: string = ""
   userData: Observable<any[]> = new Observable();
 
+
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string | any;
 
@@ -34,43 +37,49 @@ export class Tab1Page implements OnInit {
   invidChats: Observable<any[]> = new Observable();
   groupChats: Observable<any[]> = new Observable();
 
+  chatroomsArray: any[] = [];
 
   selectedTab: string = 'Friends'; // Default to Friends tab
   chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
   userDataToShow: Observable<any[]> = new Observable();
-  invidChatsData: any;
+  userID: any;
+
 
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
     private postChatService: PostChatService,
     private getAllUsersService: GetAllUsersService,
-    private chatroomInvidCall: ChatroomCallsService // Get all chatrooms for a user
+    private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
+    private invidCallService: InvidCallService,
+    private messageCallService: MessageCallsService
     ) {}
   
 
     ngOnInit() {
-      this.route.queryParams.subscribe(params => {
-        const dataParam = params['invidChatsData'];
-        this.invidChatsData = dataParam ? JSON.parse(dataParam) : null;
-      });
-    
-      this.chatroomsData = this.chatroomInvidCall.getAllChatrooms(this.invidChatsData);
-    
-      this.chatroomsData.subscribe(
-        chatrooms => {
-          console.log('All chatrooms:', chatrooms);
-          // Additional logic with chatroomsData if needed
-        },
-        error => {
-          console.error('Error retrieving chatrooms:', error);
-          // Handle error if necessary
+      this.route.queryParams.subscribe((params) => {
+        if (params['userID']) {
+          const userID = params['userID'];
+          console.log('Received userID in tab1:', userID);
+          
+          this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
+            console.log('Received chatrooms array:', chatroomsArray);
+            this.chatroomsArray = chatroomsArray
+          });
+  
+
+
         }
-      );
-    
+      });
+
+
+  
       this.getUsers("0");
     }
     
+    private processChatroomsData(){
+      console.log("It works i guess")
+    }
 
   
 
@@ -131,16 +140,18 @@ export class Tab1Page implements OnInit {
   }
 
   invidChat(chatroom: any) {
-    console.log('The chatroom value:', chatroom);
-    if (chatroom && chatroom.chatroom_data && chatroom.chatroom_data.Messages) {
-      const messages = Object.values(chatroom?.chatroom_data?.Messages || {});
-  
-      console.log('Navigating to chatroom with messages:', messages);
-  
-      if (messages.length > 0) {
-        this.router.navigate(['/invidChat'], { queryParams: { messages: JSON.stringify(messages) } });
-      }
-    }
+    const chatroomId = chatroom.ChatroomID;
+
+    this.messageCallService.getChatMessages(chatroomId).subscribe(messages => {
+      console.log('Received chatroom messages:', messages);
+
+      // Navigate to invidChat.page and pass the messages
+      this.router.navigate(['/invidChat'], {
+        queryParams: {
+          messages: JSON.stringify(messages)
+        }
+      });
+    });
   }
   
   

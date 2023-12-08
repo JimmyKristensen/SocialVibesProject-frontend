@@ -12,15 +12,12 @@ export class InvidchatPage implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
 
-  
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const dataParam = params['messages'];
-      this.messages = dataParam ? JSON.parse(dataParam) : [];
-  
-      console.log('Received messages:', this.messages);
+    this.route.queryParams.subscribe((params) => {
+      if (params['messages']) {
+        this.messages = JSON.parse(params['messages']);
+        console.log('Received messages in invidChat:', this.messages);
+      }
     });
-  
-
-}
+  }
 }
