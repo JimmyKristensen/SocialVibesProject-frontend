@@ -148,7 +148,8 @@ export class Tab1Page implements OnInit {
       // Navigate to invidChat.page and pass the messages
       this.router.navigate(['/invidChat'], {
         queryParams: {
-          messages: JSON.stringify(messages)
+          messages: JSON.stringify(messages),
+          chatroomId
         }
       });
     });

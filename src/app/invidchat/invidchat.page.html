@@ -22,6 +22,57 @@
       </div>
     </div>
   </div>
+
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+    integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+    crossorigin="anonymous"></script>
+
+    <script>
+      const socket = io('ws://127.0.0.1:5000');
+  
+      socket.on('message_list', (messageList) => {
+        const chat = document.getElementById('chat');
+        console.log(messageList);
+        // Clear existing messages
+        chat.innerHTML = '';
+  
+        // Iterate through the messages and append to the UI
+        Object.values(messageList).forEach(message => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${message.Message}`;
+          chat.appendChild(listItem);
+        });
+      });
+      socket.on('new_message', (message) => {
+        const chat = document.getElementById('chat');
+        const listItem = document.createElement('li');
+        listItem.textContent = `${message.Message}`;
+        chat.appendChild(listItem);
+      });
+      function chatroom_join() {
+        const chatroomIdInput = document.getElementById('chatroomIdInput');
+        const chatroom_id = chatroomIdInput.value;
+  
+        // Send the message to the server
+        socket.emit('chatroom_join', { chatroom_id });
+  
+        // Clear the input field
+        chatroomIdInput.value = '';
+      }
+      function chatroom_leave() {
+        const chatroomIdInput = document.getElementById('chatroomIdInput');
+        const chatroom_id = chatroomIdInput.value;
+  
+        // Send the message to the server
+        socket.emit('chatroom_leave', { chatroom_id });
+  
+        // Clear the input field
+        chatroomIdInput.value = '';
+        chat.innerHTML = '';
+      }
+    </script>
+
+
 </ion-content>
 
 <ion-footer>
