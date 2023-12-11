@@ -6,6 +6,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'ws://127.0.0.1:5000', options: {} };
 
 @NgModule({
  declarations: [AppComponent],
@@ -13,7 +16,8 @@ import { AppComponent } from './app.component';
    BrowserModule, 
    IonicModule.forRoot(), 
    AppRoutingModule,
-   HttpClientModule // add HttpClientModule here
+   HttpClientModule, // add HttpClientModule here
+   SocketIoModule.forRoot(config)
  ],
  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
  bootstrap: [AppComponent],

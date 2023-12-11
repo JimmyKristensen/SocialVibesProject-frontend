@@ -13,7 +13,7 @@ import { InvidchatPage } from './invidchat.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InvidchatPageRoutingModule
+    InvidchatPageRoutingModule,
   ],
   declarations: [InvidchatPage]
 })
