@@ -71,7 +71,11 @@ export class PostChatService {
     console.log(admin)
   
     // Discourse how to handle title
-    let title: string = this.usersToAddToChatList[0].name
+    let title: string = ""
+    this.usersToAddToChatList.forEach(element => {
+      title = title + element.name + ", "
+    });
+    title = title.slice(0, title.lastIndexOf(", "))
     console.log(title)
   
     // Creates a ParticipantsInterface with the above viables
