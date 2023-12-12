@@ -10,18 +10,22 @@
 
 
   <ion-item class="frontpage-login">
-    <ion-input class="frontpage-name" placeholder="Enter name"></ion-input>
+    <ion-input class="frontpage-name" placeholder="Login Default user"></ion-input>
   </ion-item>
   <ion-button (click)="login()" class="frontpage-button">Login</ion-button>
 
 
-  <ion-item class="recently-logged">
-    <ion-select label="Log in with recent users" placeholder="Users">
-      <ion-select-option value="user1">Timmie</ion-select-option>
-      <ion-select-option value="user2">Jimmy</ion-select-option>
-      <ion-select-option value="user3">Nicolas</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <!--Shows all the diffrent users in the backend-->
+      <ion-label>Select a user</ion-label>
+      <ion-select placeholder="Users" [(ngModel)]="selectedUserId">
+        <ion-select-option *ngFor="let user of allUsersData | keyvalue" [value]="user.key">
+          {{ user.value.Name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
   <ion-button (click)="login()" class="frontpage-button">Login</ion-button>
 
 </ion-content>
