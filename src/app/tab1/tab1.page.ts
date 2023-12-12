@@ -142,17 +142,13 @@ export class Tab1Page implements OnInit {
   invidChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
 
-    this.messageCallService.getChatMessages(chatroomId).subscribe(messages => {
-      console.log('Received chatroom messages:', messages);
 
       // Navigate to invidChat.page and pass the messages
       this.router.navigate(['/invidChat'], {
         queryParams: {
-          messages: JSON.stringify(messages),
           chatroomId
         }
       });
-    });
   }
   
   
