@@ -29,8 +29,8 @@ export class UserSelectionService {
       next: (userData) => {
         if (userData && userData.data) {
           this.userInfo = userData.data;
-          this.setID(this.userInfo.id);
-          this.setName(this.userInfo.Name);
+          this.setID(String(this.userInfo.id));
+          this.setName(String(this.userInfo.Name));
           this.setTimestamp(this.userInfo.TimeStamp);
         } else {
           console.error('User data not available.');
@@ -41,7 +41,7 @@ export class UserSelectionService {
       }
     });
   }
-
+ 
   setID(userId: string){
     this.userId = userId
     console.log("SET NAME TO: "+userId)

@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ParticipantsInterface } from '../interfaces/participants-interface';
 import { ProfileInterface } from '../interfaces/profile-interface';
+import { UserSelectionService } from '../savedData/user-selection.service'
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostChatService {
+
+
+
   URLForApi: string = 'http://127.0.0.1:5000/chatroom/create-chat';
   httpHeader = {
     headers: new HttpHeaders({
@@ -15,11 +19,14 @@ export class PostChatService {
       Authorization: 'my-auth-token'
     })
   };
-  mockLoggedInUser = {id:"-NkFBVSQGOoi2uxI4JPQ", name: "Vidar", isChecked: false}
+  mockLoggedInUser = {id: this.profileService.getID(), name: this.profileService.getName(), isChecked: false}
 
   usersToAddToChatList : ProfileInterface[] = [this.mockLoggedInUser]
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private profileService: UserSelectionService
+    ) {}
   
   addChatRoom(){
     let participants : ParticipantsInterface = this.makeListOfParticipants()
