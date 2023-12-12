@@ -14,6 +14,7 @@ export class InvidchatPage implements OnInit {
   chatroomId: any;
   messageList: any;
   userMessage: any;
+  default: any;
 
   
 
@@ -52,17 +53,25 @@ export class InvidchatPage implements OnInit {
 
 
       this.socket.on('message_list', (messageList: { [s: string]: unknown; } | ArrayLike<unknown>) => {
-        const chat = document.getElementById('chat');
         console.log("This is the socket chat: ",messageList);
         this.messageList = messageList
-        // Clear existing messages
+
+
 
         });
         this.socket.on('new_message', (newMessage: any) => {
           console.log('New message received:', newMessage);
+          console.log("This is the messageList:", this.messageList)
           this.messageList.push(newMessage); // Add the new message to the list
+          newMessage = ""
         });
     }
+  }
+  onBackButtonClick(chatroom_Id: string){
+    chatroom_Id = this.chatroomId
+    console.log("Left chatroom for id: ",chatroom_Id)
+    this.socket.off
+
   }
 
 }
