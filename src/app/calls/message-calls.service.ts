@@ -1,11 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageCallsService {
+  sendUrl: string = 'http://127.0.0.1:5000/message/send-message';
+
 
   constructor(private http: HttpClient) { }
 
@@ -22,21 +25,23 @@ export class MessageCallsService {
     );
   }
 
-  sendMessages(message: string, chatID: string, senderID: string): Observable<string> {
+
+  
+  sendMessages(message: string, chatID: string, senderID: string): void {
     const formData = new FormData();
     formData.append('message', message);
     formData.append('senderID', senderID);
-    console.log("Sending message: "+message + " From: "+senderID + " To Chatroom: "+chatID)
-    // Make the HTTP POST request
-    return this.http.post<any>('http://127.0.0.1:5000/message/send-message/' + chatID, formData).pipe(
-      tap(
-        () => console.log('Message sent successfully!'),
-        (error) => console.error('Error sending message:', error)
-      ),
-      catchError((error) => {
-        console.error('Error sending message:', error);
-        return throwError('Failed to send message');
+   
+    console.log(`Sending message: ${message} From: ${senderID} To Chatroom: ${chatID}`);
+   
+    this.http.post(`${this.sendUrl}/${chatID}`, formData).pipe(
+      tap(data => console.log('Data:', data)),
+      catchError(error => {
+        console.error('There was an error!', error);
+        return throwError(
+          'Something bad happened; please try again later.');
       })
-    );
-}
-}
+    ).subscribe();
+   }
+   
+  }
