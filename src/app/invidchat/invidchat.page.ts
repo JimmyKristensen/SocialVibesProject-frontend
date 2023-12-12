@@ -14,6 +14,7 @@ export class InvidchatPage implements OnInit {
   chatroomId: any;
   messageList: any;
   userMessage: any;
+  userID: any;
 
   
 
@@ -29,7 +30,7 @@ export class InvidchatPage implements OnInit {
     this.route.queryParams.subscribe((params) => {
 
         this.chatroomId = params['chatroomId'];
-
+        this.userID = this.userSelectionService.getID()
         console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
 
         this.joinChatroom(this.chatroomId)
