@@ -12,6 +12,7 @@ import { PostChatService } from '../calls/post-chat.service';
 import { GetAllUsersService } from '../calls/get-all-users.service';
 import { InvidCallService } from '../calls/invid-call.service';
 import { MessageCallsService } from '../calls/message-calls.service';
+import { UserSelectionService } from '../savedData/user-selection.service'
 
 @Component({
   selector: 'app-tab1',
@@ -52,7 +53,8 @@ export class Tab1Page implements OnInit {
     private getAllUsersService: GetAllUsersService,
     private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
     private invidCallService: InvidCallService,
-    private messageCallService: MessageCallsService
+    private messageCallService: MessageCallsService,
+    private userSelectionService: UserSelectionService,
     ) {}
   
 
@@ -61,7 +63,6 @@ ngOnInit() {
     if (params['userID']) {
       const userID = params['userID'];
       console.log('Received userID in tab1:', userID);
-
       this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
         console.log('Received chatrooms array:', chatroomsArray);
         this.chatroomsArray = chatroomsArray
