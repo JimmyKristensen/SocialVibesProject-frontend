@@ -34,8 +34,8 @@ export class Tab1Page implements OnInit {
   //To select which form functions should be activated form
   createChatData = new FormGroup({})
 
-  invidChats: Observable<any[]> = new Observable();
-  groupChats: Observable<any[]> = new Observable();
+  individualChats: any;
+  groupChats: any;
 
   chatroomsArray: any[] = [];
 
@@ -56,30 +56,32 @@ export class Tab1Page implements OnInit {
     ) {}
   
 
-    ngOnInit() {
-      this.route.queryParams.subscribe((params) => {
-        if (params['userID']) {
-          const userID = params['userID'];
-          console.log('Received userID in tab1:', userID);
-          
-          this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
-            console.log('Received chatrooms array:', chatroomsArray);
-            this.chatroomsArray = chatroomsArray
-          });
-  
+ngOnInit() {
+  this.route.queryParams.subscribe((params) => {
+    if (params['userID']) {
+      const userID = params['userID'];
+      console.log('Received userID in tab1:', userID);
 
+      this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
+        console.log('Received chatrooms array:', chatroomsArray);
+        this.chatroomsArray = chatroomsArray
+        
+        // Filter the chatrooms based on their type
+        this.individualChats = chatroomsArray.filter(chat => chat.Type === 'Individual Chat');
+        this.groupChats = chatroomsArray.filter(chat => chat.Type === 'Group Chat');
+        
+        console.log('Individual Chats:', this.individualChats);
+        console.log('Group Chats:', this.groupChats);
 
-        }
+        // Now you have separate arrays for Individual Chats and Group Chats
+        // You can assign these arrays to the corresponding variables in your component
       });
-
-
-  
-      this.getUsers("0");
     }
-    
-    private processChatroomsData(){
-      console.log("It works i guess")
-    }
+  });
+
+  this.getUsers("0");
+}
+
 
   
 
