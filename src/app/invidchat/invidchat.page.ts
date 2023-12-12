@@ -14,7 +14,6 @@ export class InvidchatPage implements OnInit {
   chatroomId: any;
   messageList: any;
   userMessage: any;
-  default: any;
 
   
 
@@ -50,8 +49,6 @@ export class InvidchatPage implements OnInit {
   private joinChatroom(chatroomId: any){
     if(this.chatroomId){
       this.socket.emit('chatroom_join', {chatroom_id: chatroomId})
-
-
       this.socket.on('message_list', (messageList: { [s: string]: unknown; } | ArrayLike<unknown>) => {
         console.log("This is the socket chat: ",messageList);
         this.messageList = messageList
@@ -67,10 +64,8 @@ export class InvidchatPage implements OnInit {
         });
     }
   }
-  onBackButtonClick(chatroom_Id: string){
-    chatroom_Id = this.chatroomId
-    console.log("Left chatroom for id: ",chatroom_Id)
-    this.socket.off
+  onBackButtonClick(){
+    this.socket.removeAllListeners()
 
   }
 
