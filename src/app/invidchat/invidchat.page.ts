@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
+import { MessageCallsService } from '../calls/message-calls.service';
 
 @Component({
   selector: 'app-invidchat',
@@ -11,9 +12,15 @@ export class InvidchatPage implements OnInit {
   messages: any;
   chatroomId: any;
   messageList: any;
+  userMessage: any;
+
   
 
-  constructor(private route: ActivatedRoute, private socket: Socket) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private socket: Socket,
+    private messageCallService: MessageCallsService
+    ) {}
 
 
   ngOnInit() {
@@ -29,6 +36,14 @@ export class InvidchatPage implements OnInit {
     });
   }
 
+  sendMessage(message: string) {
+    if (message.trim() === ''){
+      console.log("Empty message")
+    } else{
+    this.messageCallService.sendMessages(message, this.chatroomId)
+    }
+  }
+  
   private joinChatroom(chatroomId: any){
     if(this.chatroomId){
       this.socket.emit('chatroom_join', {chatroom_id: chatroomId})
@@ -47,5 +62,5 @@ export class InvidchatPage implements OnInit {
         });
     }
   }
-  
+
 }

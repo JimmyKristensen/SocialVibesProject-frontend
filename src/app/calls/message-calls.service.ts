@@ -21,4 +21,9 @@ export class MessageCallsService {
       })
     );
   }
+  sendMessages(message: string, chatID: string): Observable<void> {
+    const body = { message: message };
+
+    return this.http.post<void>('http://127.0.0.1:5000/message/send-message/' + chatID, body);
+  }
 }
