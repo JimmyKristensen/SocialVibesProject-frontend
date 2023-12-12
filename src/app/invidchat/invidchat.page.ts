@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-invidchat',
@@ -10,8 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 export class InvidchatPage implements OnInit {
   messages: any;
   chatroomId: any;
+  messageList: any;
+  
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private socket: Socket) { }
 
 
   ngOnInit() {
@@ -22,8 +24,28 @@ export class InvidchatPage implements OnInit {
         console.log('Received messages in invidChat:', this.messages);
         console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
 
-        
+        this.joinChatroom(this.chatroomId)
       }
     });
   }
+
+  private joinChatroom(chatroomId: any){
+    if(this.chatroomId){
+      this.socket.emit('chatroom_join', {chatroom_id: chatroomId})
+      console.log("Succ Yubiiiiii")
+
+      this.socket.on('message_list', (messageList: { [s: string]: unknown; } | ArrayLike<unknown>) => {
+        const chat = document.getElementById('chat');
+        console.log("This is the socket chat: ",messageList);
+        this.messageList = messageList
+        // Clear existing messages
+
+        });
+        this.socket.on('new_message', (newMessage: any) => {
+          console.log('New message received:', newMessage);
+          this.messageList.push(newMessage); // Add the new message to the list
+        });
+    }
+  }
+  
 }
