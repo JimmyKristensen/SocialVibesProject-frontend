@@ -1,4 +1,4 @@
-import { ProfileService } from '../calls/profile.service';
+import { ProfileService } from '../calls/profile/profile.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ParticipantsInterface } from '../interfaces/participants-interface';
-import { ProfileInterface } from '../interfaces/profile-interface';
-import { UserSelectionService } from '../savedData/user-selection.service'
+import { ParticipantsInterface } from '../../interfaces/participants-interface';
+import { ProfileInterface } from '../../interfaces/profile-interface';
+import { UserSelectionService } from '../../savedData/user-selection.service'
 
 
 @Injectable({

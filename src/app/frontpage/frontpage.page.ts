@@ -1,8 +1,8 @@
 // frontpage.page.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { InvidCallService } from '../calls/invid-call.service';
-import { GetAllUsersService } from '../calls/get-all-users.service';
+import { InvidCallService } from '../calls/invidChat/invid-call.service';
+import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
 
 interface UserData {
