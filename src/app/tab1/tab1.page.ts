@@ -165,6 +165,7 @@ ngOnInit() {
   
   clickToJoinCommunity(communityId: string){
     this.communitiesCallService.joinCommunity(communityId, this.userID)
+    console.log(communityId)
     console.log(this.userID)
     /*.subscribe((data) => {
       console.log(data);

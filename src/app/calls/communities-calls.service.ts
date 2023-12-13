@@ -41,6 +41,6 @@ export class CommunitiesCallsService {
     };
     const body = "user_Id: " + userID
     console.log(this.http.post<any>(postUrl,body))
-    return this.http.post<any>(postUrl,body, httpHeader)
+    //return this.http.post<any>(postUrl,body, httpHeader)
   }
 }
