@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <div class="header-content">
-      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/tab1" (click)="onBackButtonClick()"></ion-back-button>
       <ion-title>@John Doe</ion-title>
     </div>
   </ion-toolbar>
@@ -26,8 +26,9 @@
 <ion-footer>
   <ion-toolbar>
     <div class="input-container">
-      <ion-input placeholder="Type a message"></ion-input>
-      <ion-button>Send</ion-button>
+      <ion-input placeholder="Type a message" [(ngModel)]="userMessage"></ion-input>
+      <ion-button (click)="sendMessage(userMessage)">Send</ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>
+
