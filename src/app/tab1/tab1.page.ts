@@ -82,7 +82,7 @@ ngOnInit() {
       });
       
       this.communitiesCallService.getAllCommunities(userID).subscribe((communitiesArray) => {
-        console.log('Received chatrooms array:', communitiesArray);
+        console.log('Received communities array:', communitiesArray);
         this.communitiesArray = communitiesArray
         
       })
@@ -163,7 +163,14 @@ ngOnInit() {
       });
   }
   
-  
+  clickToJoinCommunity(communityId: string){
+    this.communitiesCallService.joinCommunity(communityId, this.userID)
+    console.log(this.userID)
+    /*.subscribe((data) => {
+      console.log(data);
+    })
+    */
+  }
 
   getSelectedBox(addProfileToChat : ProfileInterface){
     this.postChatService.addSelectedToArray(addProfileToChat)
