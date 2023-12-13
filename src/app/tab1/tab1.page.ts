@@ -12,6 +12,7 @@ import { PostChatService } from '../calls/post-chat.service';
 import { GetAllUsersService } from '../calls/get-all-users.service';
 import { InvidCallService } from '../calls/invid-call.service';
 import { MessageCallsService } from '../calls/message-calls.service';
+import { CommunitiesCallsService } from '../calls/communities-calls.service';
 
 @Component({
   selector: 'app-tab1',
@@ -38,10 +39,12 @@ export class Tab1Page implements OnInit {
   groupChats: any;
 
   chatroomsArray: any[] = [];
+  communitiesArray: any[] = []
 
   selectedTab: string = 'Friends'; // Default to Friends tab
   chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
   userDataToShow: Observable<any[]> = new Observable();
+  communitiesData: Observable<any[]> = new Observable();
   userID: any;
 
 
@@ -52,7 +55,8 @@ export class Tab1Page implements OnInit {
     private getAllUsersService: GetAllUsersService,
     private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
     private invidCallService: InvidCallService,
-    private messageCallService: MessageCallsService
+    private messageCallService: MessageCallsService,
+    private communitiesCallService: CommunitiesCallsService
     ) {}
   
 
@@ -76,6 +80,12 @@ ngOnInit() {
         // Now you have separate arrays for Individual Chats and Group Chats
         // You can assign these arrays to the corresponding variables in your component
       });
+      
+      this.communitiesCallService.getAllCommunities(userID).subscribe((communitiesArray) => {
+        console.log('Received chatrooms array:', communitiesArray);
+        this.communitiesArray = communitiesArray
+        
+      })
     }
   });
 

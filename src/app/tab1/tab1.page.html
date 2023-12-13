@@ -175,17 +175,22 @@
 
   <!-- Content for Communities tab -->
   <div *ngIf="selectedTab === 'Communities'">
-    <div class=" ion-margin-top ion-margin-start">
+    <div class="ion-margin-top ion-margin-start">
       <ion-text color="primary">New communities</ion-text>
     </div>
     <ion-segment [scrollable]="true">
-      <ion-segment-button value="Demark">
+      <ion-segment-button id="click-trigger" value="Demark">
         <ion-card>
           <img class="communities-image" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
           <ion-card-header>
             <ion-card-title>Denmark</ion-card-title>
           </ion-card-header>
         </ion-card>
+        <ion-popover trigger="click-trigger" triggerAction="click" size="cover">
+          <ng-template>
+            <ion-button class="communities-join">Join</ion-button>
+          </ng-template>
+        </ion-popover>
       </ion-segment-button>
       <ion-segment-button value="Sweden">
         <ion-card>
