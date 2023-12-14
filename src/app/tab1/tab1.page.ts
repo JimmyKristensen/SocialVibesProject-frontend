@@ -13,6 +13,7 @@ import { GetAllUsersService } from '../calls/get-all-users.service';
 import { InvidCallService } from '../calls/invid-call.service';
 import { MessageCallsService } from '../calls/message-calls.service';
 import { CommunitiesCallsService } from '../calls/communities-calls.service';
+import { UserSelectionService } from '../savedData/user-selection.service'
 
 @Component({
   selector: 'app-tab1',
@@ -56,7 +57,8 @@ export class Tab1Page implements OnInit {
     private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
     private invidCallService: InvidCallService,
     private messageCallService: MessageCallsService,
-    private communitiesCallService: CommunitiesCallsService
+    private communitiesCallService: CommunitiesCallsService,
+    private userSelectionService: UserSelectionService,
     ) {}
   
 
@@ -164,13 +166,11 @@ ngOnInit() {
   }
   
   clickToJoinCommunity(communityId: string){
-    this.communitiesCallService.joinCommunity(communityId, this.userID)
     console.log(communityId)
-    console.log(this.userID)
-    /*.subscribe((data) => {
+    console.log(this.userSelectionService.getID())
+    this.communitiesCallService.joinCommunity(communityId, this.userSelectionService.getID()).subscribe((data) => {
       console.log(data);
     })
-    */
   }
 
   getSelectedBox(addProfileToChat : ProfileInterface){
