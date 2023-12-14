@@ -153,6 +153,18 @@ ngOnInit() {
         }
       });
   }
+
+  groupChat(chatroom: any) {
+    const chatroomId = chatroom.ChatroomID;
+
+
+      // Navigate to invidChat.page and pass the messages
+      this.router.navigate(['/groupChat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+  }
   
   
 

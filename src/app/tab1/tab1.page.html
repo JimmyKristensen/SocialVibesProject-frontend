@@ -72,62 +72,7 @@
 
   <!-- Content for Friends tab -->
   <div *ngIf="selectedTab === 'Friends'">
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>@JanneDoe</ion-label>
-        <p>
-          <ion-text>
-            Latest message
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>11:45</p>
-          <p class="number-of-messages">1</p>
-        </ion-text>
-    </ion-item>
-    
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>@JanneDoe</ion-label>
-        <p>
-          <ion-text>
-            Latest message
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>11:45</p>
-          <p class="number-of-messages">99</p>
-        </ion-text>
-    </ion-item>
-  
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>@JohnDoe</ion-label>
-        <p>
-          <ion-text>
-            Hello world
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>01:30</p>
-          <p class="number-of-messages-none"></p>
-        </ion-text>
-    </ion-item>
 
-
-<!-- Replace chatroomsArray with individualChats -->
 <ion-item *ngFor="let chatroom of individualChats" (click)="invidChat(chatroom)">
   <ion-avatar class="chat-profile" slot="start">
     <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -153,7 +98,7 @@
   <!-- Content for Groups tab -->
   <div *ngIf="selectedTab === 'Groups'">
 
-<ion-item *ngFor="let chatroom of groupChats" (click)="invidChat(chatroom)">
+<ion-item *ngFor="let chatroom of groupChats" (click)="groupChat(chatroom)">
   <ion-avatar class="chat-profile" slot="start">
     <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
   </ion-avatar>

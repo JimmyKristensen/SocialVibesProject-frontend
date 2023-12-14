@@ -1,73 +1,53 @@
-.user-received-message {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    align-items: flex-start;
-  }
-  
-  .user-received-message .message-bubble {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border-radius: 10px;
-    margin-left: 10px;
-  }
-  
-  .user-sent-message {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-  }
-  
-  .user-sent-message .message-bubble {
-    background-color: blue;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: black;
-    border-top: 1px solid #e7e7e7;
-  }
-  
-  .input-container ion-input {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  
-  .input-container ion-button {
-    color: #007bff;
-    background-color: transparent;
-    border: 1px solid #007bff;
-  }
-  
-.chat-profile{
-
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
-    border: solid 2px;
-    border-color: aquamarine;
-    margin-top: 15px;
+.message-sent {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 }
-.username {
-    font-size: 0.8em;
-    color: #888;
-    margin-bottom: 5px;
-    margin-left: 35px;
-  }
 
-  .header-content {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header-content ion-back-button {
-    margin-right: 10px; /* Adjust the margin as needed */
-  }
-  
+.message-sent .message-bubble {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.message-received {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.message-received .message-bubble {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: black;
+  border-top: 1px solid #e7e7e7;
+}
+
+.input-container ion-input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.input-container ion-button {
+  color: #007bff;
+  background-color: transparent;
+  border: 1px solid #007bff;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-content ion-back-button {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
