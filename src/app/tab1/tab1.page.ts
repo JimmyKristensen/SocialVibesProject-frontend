@@ -38,6 +38,7 @@ export class Tab1Page implements OnInit {
 
   individualChats: any;
   groupChats: any;
+  communities: any;
 
   chatroomsArray: any[] = [];
   communitiesArray: any[] = []
@@ -75,9 +76,11 @@ ngOnInit() {
         // Filter the chatrooms based on their type
         this.individualChats = chatroomsArray.filter(chat => chat.Type === 'Individual Chat');
         this.groupChats = chatroomsArray.filter(chat => chat.Type === 'Group Chat');
+        this.communities = chatroomsArray.filter(chat => chat.Type === 'Community');
         
         console.log('Individual Chats:', this.individualChats);
         console.log('Group Chats:', this.groupChats);
+        console.log('Communities:', this.communities);
 
         // Now you have separate arrays for Individual Chats and Group Chats
         // You can assign these arrays to the corresponding variables in your component
@@ -106,8 +109,6 @@ ngOnInit() {
 
   getUsers(theLastIDInUsersList: string){
     if(!theLastIDInUsersList.match("0")){
-      //console.log(theLastIDInUsersList)
-      //console.log(this.usersList)
       theLastIDInUsersList = this.lastUserId
     }
     this.getAllUsersService.getAllUsersForPagination(theLastIDInUsersList).subscribe(res => {
@@ -121,8 +122,8 @@ ngOnInit() {
             name: name,
             isChecked: false
           }
-          let mockLoggedInUser = this.postChatService.getMockedLoggedInUser()
-          if(!mockLoggedInUser.id.match(userProfilForList.id)){
+          let loggedInUser = this.userSelectionService.getID()
+          if(!loggedInUser.match(userProfilForList.id)){
             this.usersList.push(userProfilForList)
           }
           //console.log(userProfilForList)
@@ -166,8 +167,8 @@ ngOnInit() {
   }
   
   clickToJoinCommunity(communityId: string){
-    console.log(communityId)
-    console.log(this.userSelectionService.getID())
+    console.log("clickToJoinCommunity Line 170 " +communityId)
+    console.log("clickToJoinCommunity Line 170 " +this.userSelectionService.getID())
     this.communitiesCallService.joinCommunity(communityId, this.userSelectionService.getID()).subscribe((data) => {
       console.log(data);
     })
