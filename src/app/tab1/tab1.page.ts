@@ -165,10 +165,20 @@ ngOnInit() {
         }
       });
   }
+
+  communityChat(chatroom: any) {
+    const chatroomId = chatroom.ChatroomID;
+
+
+      // Navigate to invidChat.page and pass the messages
+      this.router.navigate(['/communitychat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+  }
   
   clickToJoinCommunity(communityId: string){
-    console.log("clickToJoinCommunity Line 170 " +communityId)
-    console.log("clickToJoinCommunity Line 170 " +this.userSelectionService.getID())
     this.communitiesCallService.joinCommunity(communityId, this.userSelectionService.getID()).subscribe((data) => {
       console.log(data);
     })
