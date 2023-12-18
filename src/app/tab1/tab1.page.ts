@@ -166,6 +166,20 @@ ngOnInit() {
       });
   }
 
+  groupChat(chatroom: any) {
+    const chatroomId = chatroom.ChatroomID;
+
+
+      // Navigate to invidChat.page and pass the messages
+      this.router.navigate(['/groupChat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+  }
+  
+  
+
   communityChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
 
@@ -183,7 +197,6 @@ ngOnInit() {
       console.log(data);
     })
   }
-
   getSelectedBox(addProfileToChat : ProfileInterface){
     this.postChatService.addSelectedToArray(addProfileToChat)
   }

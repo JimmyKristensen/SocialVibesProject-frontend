@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <div class="header-content">
-      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
-      <ion-title>Social Vibes</ion-title>
+      <ion-back-button defaultHref="/tabs/tab1" (click)="onBackButtonClick()"></ion-back-button>
+      <ion-title>@John Doe</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -15,53 +15,20 @@
   </ion-header>
 
   <div class="message-container">
-
-    <div class="user-sent-message">
+    <div *ngFor="let message of (messageList || [])" class="{{ message.SenderId === userID ? 'message-sent' : 'message-received' }}">
       <div class="message-bubble">
-        Hey guys
-      </div>
-    </div>
-
-
-
-  <div class="groupchat-received">
-    <div class="username">Vidar Phoenix</div>
-    <div class="user-received-message">
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <div class="message-bubble">
-        kill yourself
+        {{ message.Message }}
       </div>
     </div>
   </div>
-
-    <div class="user-sent-message">
-      <div class="message-bubble">
-        1.397.609.1 this you😳?
-      </div>
-    </div>
-
-    <div class="groupchat-received">
-    <div class="username">John Doe</div>
-    <div class="user-received-message">
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <div class="message-bubble">
-        my man deadass doxed him
-      </div>
-    </div>
-    </div>
-  </div>
-  
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <div class="input-container">
-      <ion-input placeholder="Type a message"></ion-input>
-      <ion-button>Send</ion-button>
+      <ion-input placeholder="Type a message" [(ngModel)]="userMessage"></ion-input>
+      <ion-button (click)="sendMessage(userMessage)">Send</ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>
+
