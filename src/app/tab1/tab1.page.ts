@@ -1,19 +1,19 @@
 // tab1.page.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatroomCallsService } from '../calls/chatroom-calls.service';
+import { ChatroomCallsService } from '../calls/chatroom/chatroom-calls.service';
 import { Observable } from 'rxjs';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { FormGroup} from '@angular/forms';
 import { ProfileInterface } from '../interfaces/profile-interface';
-import { PostChatService } from '../calls/post-chat.service';
-import { GetAllUsersService } from '../calls/get-all-users.service';
-import { InvidCallService } from '../calls/invid-call.service';
-import { MessageCallsService } from '../calls/message-calls.service';
-import { CommunitiesCallsService } from '../calls/communities-calls.service';
+import { PostChatService } from '../calls/postChat/post-chat.service';
+import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
+import { InvidCallService } from '../calls/invidChat/invid-call.service';
+import { MessageCallsService } from '../calls/message/message-calls.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
+import { CommunitiesCallsService } from '../calls/communities-calls.service';
 
 @Component({
   selector: 'app-tab1',
