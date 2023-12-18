@@ -15,7 +15,7 @@
   </ion-header>
 
   <div class="message-container">
-    <div *ngFor="let message of (messageList || [])" class="{{ message.SenderId === 'Timmie' ? 'message-sent' : 'message-received' }}">
+    <div *ngFor="let message of (messageList || [])" class="{{ message.SenderId === userID ? 'message-sent' : 'message-received' }}">
       <div class="message-bubble">
         {{ message.Message }}
       </div>
