@@ -1,8 +1,9 @@
 // frontpage.page.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { InvidCallService } from '../calls/invid-call.service';
-import { GetAllUsersService } from '../calls/get-all-users.service';
+import { InvidCallService } from '../calls/invidChat/invid-call.service';
+import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
+import { UserSelectionService } from '../savedData/user-selection.service'
 
 interface UserData {
   Name: string;
@@ -22,6 +23,7 @@ export class FrontpagePage {
     private router: Router,
     private invidCallService: InvidCallService,
     private getAllUsersService: GetAllUsersService,
+    private userSelectionService: UserSelectionService, // Injected service to save the user id
   ) {}
 
   login() {
@@ -30,8 +32,10 @@ export class FrontpagePage {
       console.error('No user selected!');
       return;
     }
-
     console.log('Logging in with user ID:', this.selectedUserId);
+
+    // Save the selected user ID to the service
+    this.userSelectionService.setSelectedUserId(this.selectedUserId);
 
     this.fetchData(this.selectedUserId);
   }

@@ -127,89 +127,103 @@
     </ion-item>
 
 
-    <ion-item *ngFor="let chatroom of chatroomsArray" (click)="invidChat(chatroom)">
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>@{{ chatroom?.Title }}</ion-label>
-        <p>
-          <ion-text>
-            {{ chatroom?.LastMessage?.Message || 'No messages' }}
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>01:30</p>
-          <p class="number-of-messages-none"></p>
-        </ion-text>
-    </ion-item>
+<!-- Replace chatroomsArray with individualChats -->
+<ion-item *ngFor="let chatroom of individualChats" (click)="invidChat(chatroom)">
+  <ion-avatar class="chat-profile" slot="start">
+    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </ion-avatar>
+  <ion-label>
+    <ion-label>@{{ chatroom?.Title }}</ion-label>
+    <p>
+      <ion-text>
+        {{ chatroom?.LastMessage?.Message || 'No messages' }}
+      </ion-text>
+    </p>
+  </ion-label>
+  <ion-text class="ion-text-center" slot="end" color="medium">
+    <p>01:30</p>
+    <p class="number-of-messages-none"></p>
+  </ion-text>
+</ion-item>
+
     
 
   </div>
 
   <!-- Content for Groups tab -->
   <div *ngIf="selectedTab === 'Groups'">
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>@Timmie, @Jimmy, @Nicolas</ion-label>
-        <p>
-          <ion-text>
-            @Jimmy: Dette er en test for at se om hvis chat virker
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>11:45</p>
-          <p class="number-of-messages">1</p>
-        </ion-text>
-    </ion-item>
-    
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>Social Vibes</ion-label>
-        <p>
-          <ion-text>
-            @Vidar: Captain Social Vibes returns!!!
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>11:45</p>
-          <p class="number-of-messages">99</p>
-        </ion-text>
-    </ion-item>
-  
-    <ion-item>
-      <ion-avatar class="chat-profile" slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>
-        <ion-label>The Boys</ion-label>
-        <p>
-          <ion-text>
-            @Jared: Guys gyus i need help with something
-          </ion-text>
-        </p>
-        </ion-label>
-        <ion-text class="ion-text-center" slot="end" color="medium">
-          <p>01:30</p>
-          <p class="number-of-messages-none"></p>
-        </ion-text>
-    </ion-item>
+
+<ion-item *ngFor="let chatroom of groupChats" (click)="invidChat(chatroom)">
+  <ion-avatar class="chat-profile" slot="start">
+    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </ion-avatar>
+  <ion-label>
+    <ion-label>@{{ chatroom?.Title }}</ion-label>
+    <p>
+      <ion-text>
+        {{ chatroom?.LastMessage?.Message || 'No messages' }}
+      </ion-text>
+    </p>
+  </ion-label>
+  <ion-text class="ion-text-center" slot="end" color="medium">
+    <p>01:30</p>
+    <p class="number-of-messages-none"></p>
+  </ion-text>
+</ion-item>
+
   </div>
 
   <!-- Content for Communities tab -->
   <div *ngIf="selectedTab === 'Communities'">
-    <!-- Insert your Communities content here -->
-  </div>
-  
+    <div class=" ion-margin-top ion-margin-start">
+      <ion-text color="primary">New communities</ion-text>
+    </div>
+    <ion-segment [scrollable]="true">
+      <ion-segment-button value="Demark">
+        <ion-card>
+          <img class="communities-image" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Denmark</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-segment-button>
+      <ion-segment-button value="Sweden">
+        <ion-card>
+          <img class="communities-image" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Sweden</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-segment-button>
+      <ion-segment-button value="Norway">
+        <ion-card>
+          <img class="communities-image" alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Norway</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-segment-button>
+    </ion-segment>
 
+    <div class="ion-margin-top ion-margin-start">
+      <ion-text color="primary">Joined communities</ion-text>
+    </div>
+  <ion-item>
+    <ion-avatar class="chat-profile" slot="start">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-label>
+      <ion-label color="primary">Denmark</ion-label>
+      <p>
+        <ion-text color="medium">
+          @Knud: Screw Sweden
+        </ion-text>
+      </p>
+      </ion-label>
+      <ion-text class="ion-text-center" slot="end" color="primary">
+        <p>01:30</p>
+      </ion-text>
+  </ion-item>
+  </div>
   
 </ion-content>

@@ -1,17 +1,18 @@
 // tab1.page.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatroomCallsService } from '../calls/chatroom-calls.service';
+import { ChatroomCallsService } from '../calls/chatroom/chatroom-calls.service';
 import { Observable } from 'rxjs';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { FormGroup} from '@angular/forms';
 import { ProfileInterface } from '../interfaces/profile-interface';
-import { PostChatService } from '../calls/post-chat.service';
-import { GetAllUsersService } from '../calls/get-all-users.service';
-import { InvidCallService } from '../calls/invid-call.service';
-import { MessageCallsService } from '../calls/message-calls.service';
+import { PostChatService } from '../calls/postChat/post-chat.service';
+import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
+import { InvidCallService } from '../calls/invidChat/invid-call.service';
+import { MessageCallsService } from '../calls/message/message-calls.service';
+import { UserSelectionService } from '../savedData/user-selection.service'
 
 @Component({
   selector: 'app-tab1',
@@ -34,8 +35,8 @@ export class Tab1Page implements OnInit {
   //To select which form functions should be activated form
   createChatData = new FormGroup({})
 
-  invidChats: Observable<any[]> = new Observable();
-  groupChats: Observable<any[]> = new Observable();
+  individualChats: any;
+  groupChats: any;
 
   chatroomsArray: any[] = [];
 
@@ -52,34 +53,36 @@ export class Tab1Page implements OnInit {
     private getAllUsersService: GetAllUsersService,
     private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
     private invidCallService: InvidCallService,
-    private messageCallService: MessageCallsService
+    private messageCallService: MessageCallsService,
+    private userSelectionService: UserSelectionService,
     ) {}
   
 
-    ngOnInit() {
-      this.route.queryParams.subscribe((params) => {
-        if (params['userID']) {
-          const userID = params['userID'];
-          console.log('Received userID in tab1:', userID);
-          
-          this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
-            console.log('Received chatrooms array:', chatroomsArray);
-            this.chatroomsArray = chatroomsArray
-          });
-  
+ngOnInit() {
+  this.route.queryParams.subscribe((params) => {
+    if (params['userID']) {
+      const userID = params['userID'];
+      console.log('Received userID in tab1:', userID);
+      this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
+        console.log('Received chatrooms array:', chatroomsArray);
+        this.chatroomsArray = chatroomsArray
+        
+        // Filter the chatrooms based on their type
+        this.individualChats = chatroomsArray.filter(chat => chat.Type === 'Individual Chat');
+        this.groupChats = chatroomsArray.filter(chat => chat.Type === 'Group Chat');
+        
+        console.log('Individual Chats:', this.individualChats);
+        console.log('Group Chats:', this.groupChats);
 
-
-        }
+        // Now you have separate arrays for Individual Chats and Group Chats
+        // You can assign these arrays to the corresponding variables in your component
       });
-
-
-  
-      this.getUsers("0");
     }
-    
-    private processChatroomsData(){
-      console.log("It works i guess")
-    }
+  });
+
+  this.getUsers("0");
+}
+
 
   
 
@@ -142,17 +145,13 @@ export class Tab1Page implements OnInit {
   invidChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
 
-    this.messageCallService.getChatMessages(chatroomId).subscribe(messages => {
-      console.log('Received chatroom messages:', messages);
 
       // Navigate to invidChat.page and pass the messages
       this.router.navigate(['/invidChat'], {
         queryParams: {
-          messages: JSON.stringify(messages),
           chatroomId
         }
       });
-    });
   }
   
   
@@ -166,5 +165,7 @@ export class Tab1Page implements OnInit {
       console.log(data);
     })
   }
+
+
 
 }
