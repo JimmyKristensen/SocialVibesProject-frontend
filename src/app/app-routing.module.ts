@@ -17,7 +17,12 @@ const routes: Routes = [
   {
     path: "groupChat",
     loadChildren: () => import('./groupchat/groupchat.module').then( m => m.GroupchatPageModule)
+  },
+  {
+    path: 'communitychat',
+    loadChildren: () => import('./communitychat/communitychat.module').then( m => m.CommunitychatPageModule)
   }
+
 
 ];
 @NgModule({

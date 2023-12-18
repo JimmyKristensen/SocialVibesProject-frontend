@@ -13,6 +13,7 @@ import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
 import { InvidCallService } from '../calls/invidChat/invid-call.service';
 import { MessageCallsService } from '../calls/message/message-calls.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
+import { CommunitiesCallsService } from '../calls/communities-calls.service';
 
 @Component({
   selector: 'app-tab1',
@@ -37,12 +38,15 @@ export class Tab1Page implements OnInit {
 
   individualChats: any;
   groupChats: any;
+  communities: any;
 
   chatroomsArray: any[] = [];
+  communitiesArray: any[] = []
 
   selectedTab: string = 'Friends'; // Default to Friends tab
   chatroomsData: Observable<any[]> = new Observable(); //Need new observable to store the new data :(
   userDataToShow: Observable<any[]> = new Observable();
+  communitiesData: Observable<any[]> = new Observable();
   userID: any;
 
 
@@ -54,6 +58,7 @@ export class Tab1Page implements OnInit {
     private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
     private invidCallService: InvidCallService,
     private messageCallService: MessageCallsService,
+    private communitiesCallService: CommunitiesCallsService,
     private userSelectionService: UserSelectionService,
     ) {}
   
@@ -63,6 +68,7 @@ ngOnInit() {
     if (params['userID']) {
       const userID = params['userID'];
       console.log('Received userID in tab1:', userID);
+
       this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
         console.log('Received chatrooms array:', chatroomsArray);
         this.chatroomsArray = chatroomsArray
@@ -70,13 +76,21 @@ ngOnInit() {
         // Filter the chatrooms based on their type
         this.individualChats = chatroomsArray.filter(chat => chat.Type === 'Individual Chat');
         this.groupChats = chatroomsArray.filter(chat => chat.Type === 'Group Chat');
+        this.communities = chatroomsArray.filter(chat => chat.Type === 'Community');
         
         console.log('Individual Chats:', this.individualChats);
         console.log('Group Chats:', this.groupChats);
+        console.log('Communities:', this.communities);
 
         // Now you have separate arrays for Individual Chats and Group Chats
         // You can assign these arrays to the corresponding variables in your component
       });
+      
+      this.communitiesCallService.getAllCommunities(userID).subscribe((communitiesArray) => {
+        console.log('Received communities array:', communitiesArray);
+        this.communitiesArray = communitiesArray
+        
+      })
     }
   });
 
@@ -95,8 +109,6 @@ ngOnInit() {
 
   getUsers(theLastIDInUsersList: string){
     if(!theLastIDInUsersList.match("0")){
-      //console.log(theLastIDInUsersList)
-      //console.log(this.usersList)
       theLastIDInUsersList = this.lastUserId
     }
     this.getAllUsersService.getAllUsersForPagination(theLastIDInUsersList).subscribe(res => {
@@ -110,8 +122,8 @@ ngOnInit() {
             name: name,
             isChecked: false
           }
-          let mockLoggedInUser = this.postChatService.getMockedLoggedInUser()
-          if(!mockLoggedInUser.id.match(userProfilForList.id)){
+          let loggedInUser = this.userSelectionService.getID()
+          if(!loggedInUser.match(userProfilForList.id)){
             this.usersList.push(userProfilForList)
           }
           //console.log(userProfilForList)
@@ -168,6 +180,23 @@ ngOnInit() {
   
   
 
+  communityChat(chatroom: any) {
+    const chatroomId = chatroom.ChatroomID;
+
+
+      // Navigate to invidChat.page and pass the messages
+      this.router.navigate(['/communitychat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+  }
+  
+  clickToJoinCommunity(communityId: string){
+    this.communitiesCallService.joinCommunity(communityId, this.userSelectionService.getID()).subscribe((data) => {
+      console.log(data);
+    })
+  }
   getSelectedBox(addProfileToChat : ProfileInterface){
     this.postChatService.addSelectedToArray(addProfileToChat)
   }
