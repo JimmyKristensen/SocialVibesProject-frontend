@@ -13,7 +13,12 @@ const routes: Routes = [
   {
     path: "invidChat",
     loadChildren: () => import('./invidchat/invidchat.module').then( m => m.InvidchatPageModule)
+  },
+  {
+    path: 'communitychat',
+    loadChildren: () => import('./communitychat/communitychat.module').then( m => m.CommunitychatPageModule)
   }
+
 
 ];
 @NgModule({
