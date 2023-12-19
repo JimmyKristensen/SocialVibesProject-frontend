@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
+import { AlertController } from '@ionic/angular';
 import { MessageCallsService } from '../calls/message/message-calls.service';
 import { UserSelectionService } from '../savedData/user-selection.service';
+import { ChatroomCallsService } from '../calls/chatroom/chatroom-calls.service';
 
 @Component({
   selector: 'app-groupchat',
@@ -15,14 +17,18 @@ export class GroupchatPage implements OnInit {
   messageList: any;
   userMessage: any;
   userID: any;
+  participants: any;
 
   
 
   constructor(
     private route: ActivatedRoute, 
+    private router: Router,
     private socket: Socket,
     private messageCallService: MessageCallsService,
     private userSelectionService: UserSelectionService,
+    private alertController: AlertController,
+    private chatroomCallService: ChatroomCallsService,
     ) {}
 
 
@@ -32,6 +38,7 @@ export class GroupchatPage implements OnInit {
         this.chatroomId = params['chatroomId'];
         this.userID = this.userSelectionService.getID()
         console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
+        console.log('User id is: '+this.userID)
 
         this.joinChatroom(this.chatroomId)
     });
@@ -70,4 +77,40 @@ export class GroupchatPage implements OnInit {
 
   }
 
+  async leaveChatroom() {
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to leave the chatroom?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            // User clicked "Cancel", do nothing.
+          }
+        },
+        {
+          text: 'Leave',
+          handler: () => {
+            // User clicked "Leave", handle leaving the chatroom here.
+            // You can call your leaveChatroom logic or navigate away.
+            // For example:
+            this.confirmLeaveChatroom();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
+  confirmLeaveChatroom() {
+    console.log('Leaving the chatroom...');
+    this.chatroomCallService.leaveChatroom(this.userID, this.chatroomId).subscribe(() => {
+      // After leaving the chatroom, navigate back to tab1
+      this.router.navigate(['/tabs/tab1']);
+    });
+  }
+  
+  
 }

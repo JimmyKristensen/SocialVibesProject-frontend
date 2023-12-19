@@ -23,4 +23,14 @@ export class ChatroomCallsService {
   
     return forkJoin(observables);
   }
+  
+  leaveChatroom(userID: string, chatroomID: string): Observable<any> {
+    console.log("User id: "+userID, ", Chatroom id: "+chatroomID)
+    const body = { user_Id: userID }; 
+    return this.http.patch(`http://127.0.0.1:5000/chatroom/leave-chatroom/${chatroomID}`, body).pipe(
+      tap((response: any) => {
+        console.log(`Left chatroom ${chatroomID} for user ${userID}: `, response);
+      })
+    );
+  }
 }

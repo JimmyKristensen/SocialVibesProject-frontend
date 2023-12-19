@@ -3,6 +3,31 @@
     <div class="header-content">
       <ion-back-button defaultHref="/tabs/tab1" (click)="onBackButtonClick()"></ion-back-button>
       <ion-title>@John Doe</ion-title>
+
+
+<ion-button id="popover-button">Open Menu</ion-button>
+  <ion-popover trigger="popover-button" [dismissOnSelect]="true" size="cover">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item [button]="true" [detail]="false" (click)="leaveChatroom()" color="danger">Leave Chatroom</ion-item>
+
+          <ion-item [button]="true" id="nested-trigger">See all members</ion-item>
+
+          <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+            <ng-template>
+              <ion-content>
+                <ion-list>
+                  <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+
     </div>
   </ion-toolbar>
 </ion-header>
@@ -36,4 +61,3 @@
     </div>
   </ion-toolbar>
 </ion-footer>
-
