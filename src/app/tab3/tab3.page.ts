@@ -3,6 +3,8 @@ import { GoogleMap, Marker } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { EventmodalPage } from '../eventmodal/eventmodal.page';
 
 
 let latitude: number;
@@ -16,7 +18,7 @@ let longitude: number;
 export class Tab3Page implements OnInit {
   @ViewChild('map') mapRef: ElementRef | any;
   newMap: GoogleMap | any;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private modalCtrl: ModalController) {}
 
   ngOnInit() {
     currentPosition().then((resp) => {
@@ -51,7 +53,7 @@ export class Tab3Page implements OnInit {
           lat: 55.6885639,
           lng: 12.5079058,
         },
-        title: 'Somewhere near me',
+        title: '-154151',
         snippet: "Yippee!"
       },
       {
@@ -67,7 +69,15 @@ export class Tab3Page implements OnInit {
     await this.newMap.addMarkers(markers)
 
     this.newMap.setOnMarkerClickListener(async (marker: any) => {
-      console.log(marker)
+      const modal = await this.modalCtrl.create({
+        component: EventmodalPage,
+         componentProps: {
+          marker,
+         },
+         breakpoints: [0, 0,3],
+         initialBreakpoint: 0.3
+      });
+      modal.present();
     })
   }
 

@@ -24,6 +24,10 @@ const routes: Routes = [
   },  {
     path: 'eventcreate',
     loadChildren: () => import('./eventcreate/eventcreate.module').then( m => m.EventcreatePageModule)
+  },
+  {
+    path: 'eventmodal',
+    loadChildren: () => import('./eventmodal/eventmodal.module').then( m => m.EventmodalPageModule)
   }
 
 
