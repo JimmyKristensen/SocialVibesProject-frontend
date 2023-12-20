@@ -18,6 +18,7 @@ export class GroupchatPage implements OnInit {
   userMessage: any;
   userID: any;
   participants: any;
+  admin: any
 
   
 
@@ -32,17 +33,32 @@ export class GroupchatPage implements OnInit {
     ) {}
 
 
-  ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-
+    ngOnInit() {
+      this.route.queryParams.subscribe((params) => {
         this.chatroomId = params['chatroomId'];
-        this.userID = this.userSelectionService.getID()
-        console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
-        console.log('User id is: '+this.userID)
-
-        this.joinChatroom(this.chatroomId)
-    });
-  }
+        this.userID = this.userSelectionService.getID();
+        console.log('Also received chatrooms id for the current chat: ', this.chatroomId);
+        console.log('User id is: ' + this.userID);
+    
+        this.joinChatroom(this.chatroomId);
+    
+        // Call getParticipants and use new subscribe syntax
+        this.chatroomCallService.getParticipants(this.chatroomId).subscribe({
+          next: (result: any) => {
+            // Update participants and admin properties
+            this.participants = result.participants;
+            this.admin = result.admin;
+        
+            // Check if the right values are there
+            console.log("Participants: ", this.participants);
+            console.log("Admin: ", this.admin);
+          },
+          error: (error: any) => {
+            console.error('Error fetching participants:', error);
+          },
+        });
+      });
+    }
 
   sendMessage(userMessage: string) {
     if (userMessage.trim() === ''){

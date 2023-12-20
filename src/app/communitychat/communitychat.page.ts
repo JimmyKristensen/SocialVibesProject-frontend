@@ -17,6 +17,8 @@ export class CommunitychatPage implements OnInit {
   messageList: any;
   userMessage: any;
   userID: any;
+  participants: any;
+  admin: any;
 
   constructor(
     private route: ActivatedRoute, 
@@ -36,6 +38,21 @@ export class CommunitychatPage implements OnInit {
       console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
 
       this.joinChatroom(this.chatroomId)
+
+      this.chatroomCallService.getParticipants(this.chatroomId).subscribe({
+        next: (result: any) => {
+          // Update participants and admin properties
+          this.participants = result.participants;
+          this.admin = result.admin;
+      
+          // Check if the right values are there
+          console.log("Participants: ", this.participants);
+          console.log("Admin: ", this.admin);
+        },
+        error: (error: any) => {
+          console.error('Error fetching participants:', error);
+        },
+      });
   });
   }
 

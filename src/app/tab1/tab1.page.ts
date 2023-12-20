@@ -204,6 +204,7 @@ ngOnInit() {
   createChat(){
     this.postChatService.addChatRoom().subscribe((data) => {
       console.log(data);
+      this.ngOnInit
     })
   }
 

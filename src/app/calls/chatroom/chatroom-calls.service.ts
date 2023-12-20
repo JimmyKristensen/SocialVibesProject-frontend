@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { NONE_TYPE } from '@angular/compiler';
 
 @Injectable({
@@ -33,4 +33,23 @@ export class ChatroomCallsService {
       })
     );
   }
+
+  getParticipants(chatroomId: string): Observable<any> {
+    return this.http.get('http://127.0.0.1:5000/chatroom/get/' + chatroomId).pipe(
+      map((chatroomData: any) => {
+        const { Chatroom, Participants } = chatroomData.chatroom_data;
+  
+        // Extract the admin and participants separately
+        const { Admin } = Chatroom;
+        const participants = Participants.filter((participant: any) => participant.id !== Admin.id);
+        const updatedParticipants = [...participants, Admin]; // Include admin in participants
+  
+        return { chatroomId, admin: Admin, participants: updatedParticipants };
+      }),
+      tap((result: any) => {
+        console.log('Chatroom data for chatroomId ' + result.chatroomId + ': ', result);
+      })
+    );
+  }
+  
 }

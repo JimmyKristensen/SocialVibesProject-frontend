@@ -17,9 +17,9 @@
           <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
             <ng-template>
               <ion-content>
-                <ion-list>
-                  <ion-item [button]="true" [detail]="false">Nested option</ion-item>
-                </ion-list>
+                <ion-item *ngFor="let participant of participants" [detail]="false">
+                  {{ participant.Name }}
+                </ion-item>
               </ion-content>
             </ng-template>
           </ion-popover>
