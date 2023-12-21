@@ -58,10 +58,10 @@ export class Tab3Page implements OnInit {
       },
       {
         coordinate: {
-          lat: 56.6885639,
-          lng: 13.5079058,
+          lat: 55.676098,
+          lng: 12.568337,
         },
-        title: 'Futher from me',
+        title: 'NUKESSS',
         snippet: "Yippee! 2"
       }
     ]
@@ -72,10 +72,15 @@ export class Tab3Page implements OnInit {
       const modal = await this.modalCtrl.create({
         component: EventmodalPage,
          componentProps: {
-          marker,
+          id: "-1111",
+          Adress: "Vestre Teglgade 16, 316",
+          Description: "A Christmas PARTY",
+          StartDate: "20/12/2023",
+          StopDate: "24/12/2023",
+          marker
          },
-         breakpoints: [0, 0,3],
-         initialBreakpoint: 0.3
+         breakpoints: [0, 0.5],
+         initialBreakpoint: 0.5
       });
       modal.present();
     })

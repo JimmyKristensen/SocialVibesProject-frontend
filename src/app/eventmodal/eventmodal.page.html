@@ -5,7 +5,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-text>{{marker?.snippet}}</ion-text>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label>Adress: </ion-label>
+      <ion-text>{{Adress}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description: </ion-label>
+      <ion-text>{{Description}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>StartDate: </ion-label>
+      <ion-text>{{StartDate}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>StopDate: </ion-label>
+      <ion-text>{{StopDate}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-button>Join event</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
