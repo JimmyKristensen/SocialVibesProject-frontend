@@ -1,9 +1,9 @@
 // frontpage.page.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { InvidCallService } from '../calls/invidChat/invid-call.service';
 import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
+import { ChatroomCallsService } from '../calls/chatroom/chatroom-calls.service';
 
 interface UserData {
   Name: string;
@@ -21,7 +21,7 @@ export class FrontpagePage {
 
   constructor(
     private router: Router,
-    private invidCallService: InvidCallService,
+    private chatroomService: ChatroomCallsService,
     private getAllUsersService: GetAllUsersService,
     private userSelectionService: UserSelectionService, // Injected service to save the user id
   ) {}
@@ -41,7 +41,7 @@ export class FrontpagePage {
   }
 
   fetchData(userID: string) {
-    this.invidCallService.getInvidChats(userID).subscribe((data) => {
+    this.chatroomService.getChatrooms(userID).subscribe((data) => {
       console.log('Test data given: ', data);
       this.router.navigate(['./tabs/tab1'], {
         queryParams: { userID: userID },

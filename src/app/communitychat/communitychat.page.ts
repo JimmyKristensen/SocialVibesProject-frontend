@@ -19,6 +19,7 @@ export class CommunitychatPage implements OnInit {
   userID: any;
   participants: any;
   admin: any;
+  title: any;
 
   constructor(
     private route: ActivatedRoute, 
@@ -44,7 +45,8 @@ export class CommunitychatPage implements OnInit {
           // Update participants and admin properties
           this.participants = result.participants;
           this.admin = result.admin;
-      
+          this.title = result.title
+
           // Check if the right values are there
           console.log("Participants: ", this.participants);
           console.log("Admin: ", this.admin);

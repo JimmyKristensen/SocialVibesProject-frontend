@@ -10,18 +10,20 @@ import { NONE_TYPE } from '@angular/compiler';
 export class ChatroomCallsService {
   constructor(private http: HttpClient) { }
 
-  getAllChatrooms(data: any): Observable<any[]> {
-    const chatroomIds: string[] = data.chatroom_ids;
-  
-    const observables: Observable<any>[] = chatroomIds.map(user_id => {
-      return this.http.get('http://127.0.0.1:5000/chatroom/get/' + user_id).pipe(
-        tap((chatroomData: any) => {
-          console.log('Chatroom data for user_id ' + user_id + ': ', chatroomData);
-        })
-      );
-    });
-  
-    return forkJoin(observables);
+  getChatrooms(userID: string): Observable<any[]> {
+    return this.http.get('http://127.0.0.1:5000/chatroom/user-get/' + userID).pipe(
+      tap(data => console.log('This is the data: ', data)),
+      map((response: any) => {
+        // Extract the chatrooms object from the JSON response
+        const chatroomsObject = response.chatrooms;
+
+
+        // Convert the chatrooms object to an array
+        const chatroomsArray = Object.values(chatroomsObject);
+
+        return chatroomsArray;
+      })
+    );
   }
   
   leaveChatroom(userID: string, chatroomID: string): Observable<any> {
@@ -40,16 +42,17 @@ export class ChatroomCallsService {
         const { Chatroom, Participants } = chatroomData.chatroom_data;
   
         // Extract the admin and participants separately
-        const { Admin } = Chatroom;
+        const { Admin, Title } = Chatroom;
         const participants = Participants.filter((participant: any) => participant.id !== Admin.id);
         const updatedParticipants = [...participants, Admin]; // Include admin in participants
   
-        return { chatroomId, admin: Admin, participants: updatedParticipants };
+        return { chatroomId, admin: Admin, participants: updatedParticipants, title: Title };
       }),
       tap((result: any) => {
         console.log('Chatroom data for chatroomId ' + result.chatroomId + ': ', result);
       })
     );
   }
+  
   
 }

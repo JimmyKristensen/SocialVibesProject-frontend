@@ -18,7 +18,8 @@ export class GroupchatPage implements OnInit {
   userMessage: any;
   userID: any;
   participants: any;
-  admin: any
+  admin: any;
+  title: any;
 
   
 
@@ -45,11 +46,11 @@ export class GroupchatPage implements OnInit {
         // Call getParticipants and use new subscribe syntax
         this.chatroomCallService.getParticipants(this.chatroomId).subscribe({
           next: (result: any) => {
-            // Update participants and admin properties
+
             this.participants = result.participants;
             this.admin = result.admin;
-        
-            // Check if the right values are there
+            this.title = result.title
+
             console.log("Participants: ", this.participants);
             console.log("Admin: ", this.admin);
           },

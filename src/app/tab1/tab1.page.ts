@@ -10,7 +10,7 @@ import { FormGroup} from '@angular/forms';
 import { ProfileInterface } from '../interfaces/profile-interface';
 import { PostChatService } from '../calls/postChat/post-chat.service';
 import { GetAllUsersService } from '../calls/getUsers/get-all-users.service';
-import { InvidCallService } from '../calls/invidChat/invid-call.service';
+
 import { MessageCallsService } from '../calls/message/message-calls.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
 import { CommunitiesCallsService } from '../calls/communities-calls.service';
@@ -54,10 +54,9 @@ export class Tab1Page implements OnInit {
     private router: Router, 
     private route: ActivatedRoute,
     private postChatService: PostChatService,
-    private getAllUsersService: GetAllUsersService,
-    private chatroomInvidCall: ChatroomCallsService, // Get all chatrooms for a user
-    private invidCallService: InvidCallService,
-    private messageCallService: MessageCallsService,
+    private getAllUsersService: GetAllUsersService, // User service
+    private chatroomCall: ChatroomCallsService, // Get all chatrooms for a user
+    private messageCallService: MessageCallsService, // Message Service
     private communitiesCallService: CommunitiesCallsService,
     private userSelectionService: UserSelectionService,
     ) {}
@@ -69,7 +68,7 @@ ngOnInit() {
       const userID = params['userID'];
       console.log('Received userID in tab1:', userID);
 
-      this.invidCallService.getInvidChats(userID).subscribe((chatroomsArray) => {
+      this.chatroomCall.getChatrooms(userID).subscribe((chatroomsArray) => {
         console.log('Received chatrooms array:', chatroomsArray);
         this.chatroomsArray = chatroomsArray
         
@@ -82,8 +81,7 @@ ngOnInit() {
         console.log('Group Chats:', this.groupChats);
         console.log('Communities:', this.communities);
 
-        // Now you have separate arrays for Individual Chats and Group Chats
-        // You can assign these arrays to the corresponding variables in your component
+
       });
       
       this.communitiesCallService.getAllCommunities(userID).subscribe((communitiesArray) => {
