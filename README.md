@@ -8,7 +8,7 @@ for a 10 week working period of Scrum.
 ## Requirements:  
 To run the program frontend these are some basic requirements
 
-### - Node.js (Current Version: 20.9.0)
-### - Angular (Current Version: 16.2.12)
-### - Ionic CLI (Current Version: 7.1.1) / Ionic Framework (Current Version: 7.5.3)
+### - Node.js (Version Used: 20.9.0)
+### - Angular (Version Used: 16.2.12)
+### - Ionic CLI (Version Used: 7.1.1) / Ionic Framework (Version Used: 7.5.3)
 ### - Recommend using Visual Studio Code to run it
