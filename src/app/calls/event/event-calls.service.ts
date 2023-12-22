@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -19,5 +19,18 @@ export class EventCallsService {
     return this.http.get('http://127.0.0.1:5000/event/get/'+id).pipe(
       tap(data => console.log('This is the events: ', data))
     );
+  }
+
+  joinEvent(eventID: string, userID: string){
+    const postUrl: string = "http://127.0.0.1:5000/event/join/" + eventID
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+    const body = JSON.stringify({"user_Id":  userID })
+    console.log(this.http.patch<any>(postUrl,body))
+    return this.http.patch<any>(postUrl,body, httpHeader)
   }
 }

@@ -46,7 +46,7 @@ export class Tab3Page implements OnInit {
           lat: latitude,
           lng: longitude,
         },
-        zoom: 15,
+        zoom: 13,
       },
     });
     this.addMarkers()
