@@ -5,6 +5,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EventmodalPage } from '../eventmodal/eventmodal.page';
+import { EventCallsService } from '../calls/event/event-calls.service';
 
 
 let latitude: number;
@@ -18,7 +19,11 @@ let longitude: number;
 export class Tab3Page implements OnInit {
   @ViewChild('map') mapRef: ElementRef | any;
   newMap: GoogleMap | any;
-  constructor(private router: Router, private modalCtrl: ModalController) {}
+  constructor(
+    private router: Router, 
+    private modalCtrl: ModalController,
+    private eventCalls: EventCallsService,
+    ) {}
 
   ngOnInit() {
     currentPosition().then((resp) => {
@@ -47,48 +52,61 @@ export class Tab3Page implements OnInit {
     this.addMarkers()
   }
   async addMarkers(){
-    const markers: Marker[] = [
-      {
+    let allEventsId = await this.getAllEventId();
+    const markers: Marker[] = []
+    allEventsId.forEach(eventData => {
+      const marker: Marker = { 
         coordinate: {
-          lat: 55.6885639,
-          lng: 12.5079058,
+          lat: eventData.lat,
+          lng: eventData.lon,
         },
-        title: '-154151',
-        snippet: "Yippee!"
-      },
-      {
-        coordinate: {
-          lat: 55.676098,
-          lng: 12.568337,
-        },
-        title: 'NUKESSS',
-        snippet: "Yippee! 2"
+        title: eventData.title,
       }
-    ]
-
+      markers.push(marker);
+     })
+   
     await this.newMap.addMarkers(markers)
-
+   
     this.newMap.setOnMarkerClickListener(async (marker: any) => {
+      const matchingEvent = allEventsId.find(event => event.title === marker.title).id;
       const modal = await this.modalCtrl.create({
         component: EventmodalPage,
-         componentProps: {
-          id: "-1111",
-          Adress: "Vestre Teglgade 16, 316",
-          Description: "A Christmas PARTY",
-          StartDate: "20/12/2023",
-          StopDate: "24/12/2023",
+        componentProps: {
+          id: matchingEvent,
           marker
-         },
-         breakpoints: [0, 0.5],
-         initialBreakpoint: 0.5
+        },
+        breakpoints: [0, 0.5],
+        initialBreakpoint: 0.5
       });
       modal.present();
     })
-  }
+   }
 
   toCreateEvent(){
     this.router.navigate(['/eventcreate'])
   }
+
+  async getAllEventId(){
+    let allEventsFromDatabase: any [] = [];
+    const data = await this.eventCalls.getAllEvents().toPromise();
+    let events = data['Data']['Event']
+    for (let key in events){
+      let eventId = events[key]['Id'];
+      let latitude = events[key]['Latitude']
+      let longitude = events[key]['Longitude']
+      let title = events[key]['Title']
+      let event = {
+        id: eventId,
+        lat: latitude,
+        lon: longitude,
+        title: title
+      }
+      console.log(event)
+      allEventsFromDatabase.push(event)
+    }
+    console.log(allEventsFromDatabase)
+    return allEventsFromDatabase
+   }
 
 }
 const currentPosition = async () => {

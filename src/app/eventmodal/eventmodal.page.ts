@@ -7,10 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EventmodalPage implements OnInit {
   @Input() id: any;
-  @Input() Adress: any;
-  @Input() Description: any;
-  @Input() StartDate: any;
-  @Input() StopDate: any;
   @Input() marker: any;
 
   constructor() { }
@@ -18,7 +14,7 @@ export class EventmodalPage implements OnInit {
   ngOnInit() {
   }
 
- 
+  
 
 }
 
