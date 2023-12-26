@@ -176,13 +176,37 @@ ngOnInit() {
       });
   }
   
+  instaJoin(chatId: any, type: any) {
+    const chatroomId = chatId;
+    
+    console.log("Join chatroom")
+    if (type === "Individual Chat"){
+      console.log("Joining indvid chat")
+      this.router.navigate(['/invidChat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+
+    } else if(type === "Group Chat") {
+      console.log('Joining group chat')
+      this.router.navigate(['/groupChat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+    }
+
+
+  }
+  
   
 
   communityChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
 
 
-      // Navigate to invidChat.page and pass the messages
+      // Navigate to communitychat.page and pass the messages
       this.router.navigate(['/communitychat'], {
         queryParams: {
           chatroomId
@@ -199,13 +223,24 @@ ngOnInit() {
     this.postChatService.addSelectedToArray(addProfileToChat)
   }
 
-  createChat(){
-    this.postChatService.addChatRoom().subscribe((data) => {
-      console.log(data);
-      this.ngOnInit
-    })
+  createChat() {
+    // Call addChatRoom and subscribe to the returned observable
+    this.postChatService.addChatRoom().subscribe(
+      (data) => {
+        console.log(data);
+        const chatID = data.chatroomID;
+        console.log("Id : ", chatID);
+        const type = data.chatroomType;
+        console.log("Type: ", type);
+  
+        // Continue with your logic here, e.g., call ngOnInit
+        this.instaJoin(chatID, type)
+      },
+      (error) => {
+        console.error('Error during posting: ', error);
+      }
+    );
   }
-
 
 
 }
