@@ -13,6 +13,9 @@ To run the program frontend these are some basic requirements
 #### - Ionic CLI (Version Used: 7.1.1) / Ionic Framework (Version Used: 7.5.3)
 #### - Recommend using Visual Studio Code to run it
 #### - Typescript (Version Used: 5.0.4)
+These 2 imports to make sure events work
+#### npm install @capacitor/google-maps --legacy-peer-deps
+#### npm install @capacitor/geolocation --legacy-peer-deps
 
 ## Extra stuff:
 These should automatilly be downloaded when you download angular and some of the other stuff but just in case here they are
