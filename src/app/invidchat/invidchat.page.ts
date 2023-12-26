@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { MessageCallsService } from '../calls/message/message-calls.service';
 import { UserSelectionService } from '../savedData/user-selection.service'
+import { ChatroomCallsService } from '../calls/chatroom/chatroom-calls.service';
 
 @Component({
   selector: 'app-invidchat',
@@ -15,6 +16,7 @@ export class InvidchatPage implements OnInit {
   messageList: any;
   userMessage: any;
   userID: any;
+  title: any;
 
   
 
@@ -23,6 +25,7 @@ export class InvidchatPage implements OnInit {
     private socket: Socket,
     private messageCallService: MessageCallsService,
     private userSelectionService: UserSelectionService,
+    private chatroomCallService: ChatroomCallsService,
     ) {}
 
 
@@ -34,6 +37,18 @@ export class InvidchatPage implements OnInit {
         console.log('Also recieved chatrooms id for the current chat: ', this.chatroomId)
 
         this.joinChatroom(this.chatroomId)
+
+
+        //Getting the title, while ignoring the participant output
+        this.chatroomCallService.getParticipants(this.chatroomId).subscribe({
+          next: (result: any) => {
+            this.title = result.title
+          },
+          error: (error: any) => {
+            console.error('Error fetching participants:', error);
+          },
+        });
+
     });
   }
 

@@ -44,7 +44,7 @@ export class UserSelectionService {
  
   setID(userId: string){
     this.userId = userId
-    console.log("SET NAME TO: "+userId)
+    console.log("SET ID TO: "+userId)
   }
   setName(userName: string){
     this.userName = userName
