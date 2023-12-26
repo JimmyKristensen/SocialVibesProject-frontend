@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="header-content">
       <ion-back-button defaultHref="/tabs/tab1" (click)="onBackButtonClick()"></ion-back-button>
-      <ion-title>@John Doe</ion-title>
+      <ion-title>{{title}}</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -17,9 +17,6 @@
   <div class="message-container">
     <div *ngFor="let message of (messageList || [])" class="message">
       <div class="{{ message.Sender?.id === userID ? 'message-sent' : 'message-received' }}">
-        <div class="message-sender">
-          {{ message.Sender?.Name }}
-        </div>
         <div class="message-bubble">
           {{ message.Message }}
         </div>

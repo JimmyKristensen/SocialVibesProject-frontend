@@ -1,24 +1,38 @@
-.message-sent {
+.message-container {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.message {
   margin-bottom: 10px;
 }
 
-.message-sent .message-bubble {
-  background-color: white;
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-received {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message-received .message-bubble {
+  background-color: #E6F6F7;
   color: black;
   padding: 10px;
   border-radius: 10px;
 }
 
-.message-received {
+.message-sent {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.message-received .message-bubble {
-  background-color: blue;
+.message-sent .message-bubble {
+  background-color: #00A2AD;;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -43,11 +57,12 @@
   background-color: transparent;
   border: 1px solid #007bff;
 }
+
 .header-content {
   display: flex;
   align-items: center;
 }
 
 .header-content ion-back-button {
-  margin-right: 10px; /* Adjust the margin as needed */
+  margin-right: 10px;
 }
