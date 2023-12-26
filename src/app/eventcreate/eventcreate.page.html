@@ -1,25 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Create Event</ion-title>
+    <div class="header-content">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+      <ion-title>Create Event</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
-    <ion-input label="Title"  placeholder="Enter Title"/>
+    <ion-input label="Title" #titleInput  [(ngModel)]="title" placeholder="Enter Title"/>
   </ion-item>
   <ion-item>
-    <ion-textarea label="Descriptions" placeholder="Enter Descriptions"></ion-textarea>
+    <ion-textarea label="Descriptions" [(ngModel)]="descriptions"  placeholder="Enter Descriptions"></ion-textarea>
   </ion-item>
   <ion-item>
-    <ion-input label="Addresse" type="street-address"  placeholder="Enter Addresse"></ion-input>
+    <ion-input label="Adresse" type="street-adress" [(ngModel)]="adresse"   placeholder="Enter Adresse"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Start date and time</ion-label>
     <ion-datetime-button datetime="starttime"></ion-datetime-button>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime locale="dk-DK" hourCycle="h23" id="starttime"></ion-datetime>
+        <ion-datetime min="{{currentDate}}" [(ngModel)]="starttime" locale="dk-DK" hourCycle="h23" id="starttime"></ion-datetime>
       </ng-template>
     </ion-modal>
   </ion-item>
@@ -28,7 +31,7 @@
     <ion-datetime-button datetime="endtime"></ion-datetime-button>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime locale="dk-DK" hourCycle="h23" id="endtime"></ion-datetime>
+        <ion-datetime min="{{currentDate}}" [(ngModel)]="endtime" locale="dk-DK" hourCycle="h23" id="endtime"></ion-datetime>
       </ng-template>
     </ion-modal>
   </ion-item>
@@ -36,5 +39,5 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button>Create event</ion-button>
+  <ion-button (click)="postEvent(title, descriptions, adresse, starttime, endtime)">Create event</ion-button>
 </ion-footer>

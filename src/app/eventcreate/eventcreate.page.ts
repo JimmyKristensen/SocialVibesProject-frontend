@@ -17,6 +17,18 @@ export class EventcreatePage implements OnInit {
   newMap: GoogleMap | any;
   markerId: string | any;
 
+  title: string | any;
+  descriptions: string | any;
+  adresse: string | any;
+  starttime: string | any;
+  endtime: string | any;
+  googleMap: string | any;
+  markerLatitude: string | any;
+  markerLongitude: string | any;
+
+  currentDate: any
+
+
   constructor() { }
 
   ngOnInit() {
@@ -27,6 +39,7 @@ export class EventcreatePage implements OnInit {
       console.log(longitude)
       this.createMap(); // Call createMap() here
     })
+    this.currentDate = new Date().toISOString();
   }
 
   async createMap() {
@@ -69,9 +82,23 @@ export class EventcreatePage implements OnInit {
 
     await this.newMap.setOnMapClickListener((event: { latitude: any; longitude: any; }) => {
       console.log('setOnMapClickListener', event);
+      this.markerLatitude = event.latitude;
+      this.markerLongitude = event.longitude;
       this.addMarker(event.latitude, event.longitude);
     });
 
+  }
+
+  postEvent(title: string, descriptions: string, adresse: string, starttime: string ,endtime: string){
+    
+    console.log(title)
+    console.log(descriptions)
+    console.log(adresse)
+    console.log(formateDate(starttime))
+    console.log(formateTime(starttime))
+    console.log(endtime)
+    console.log(this.markerLatitude)
+    console.log(this.markerLongitude)
   }
   
 
@@ -84,4 +111,21 @@ const currentPosition = async () => {
   return coordinates
 };
 
+
+function formateDate(dateToConveryt: string) {
+  let date = new Date(dateToConveryt);
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let formattedDate = `${day}-${month}-${year}`;
+  return formattedDate
+}
+
+function formateTime(dateToConveryt: string){
+  let date = new Date(dateToConveryt);
+  let hours = date.getHours();
+  let minutes = date.getMinutes().toString().padStart(2, '0');
+  let formattedTime = `${hours}:${minutes}`;
+  return formattedTime
+}
 
