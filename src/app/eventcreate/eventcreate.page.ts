@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap} from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
+import { UserSelectionService } from '../savedData/user-selection.service';
+import { EventCallsService } from '../calls/event/event-calls.service';
 
 
 let latitude: number;
@@ -29,7 +31,10 @@ export class EventcreatePage implements OnInit {
   currentDate: any
 
 
-  constructor() { }
+  constructor(
+    private userSelectionService: UserSelectionService,
+    private eventCalls: EventCallsService
+    ) { }
 
   ngOnInit() {
     currentPosition().then((resp) => {
@@ -37,7 +42,7 @@ export class EventcreatePage implements OnInit {
       console.log(latitude)
       longitude = resp.coords.longitude;
       console.log(longitude)
-      this.createMap(); // Call createMap() here
+      this.createMap();
     })
     this.currentDate = new Date().toISOString();
   }
@@ -89,16 +94,25 @@ export class EventcreatePage implements OnInit {
 
   }
 
-  postEvent(title: string, descriptions: string, adresse: string, starttime: string ,endtime: string){
-    
+  postEvent(title: string, descriptions: string, adresse: string, startInfo: string ,endInfo: string){
+    const userId = this.userSelectionService.getID()
+    let startDate = formateDate(startInfo);
+    let startTime = formateTime(startInfo)
+    let endDate  = formateDate(endInfo)
+    let endTime = formateTime(endInfo)
     console.log(title)
     console.log(descriptions)
     console.log(adresse)
-    console.log(formateDate(starttime))
-    console.log(formateTime(starttime))
-    console.log(endtime)
+    console.log(startDate)
+    console.log(startTime)
+    console.log(endDate)
+    console.log(endTime)
     console.log(this.markerLatitude)
     console.log(this.markerLongitude)
+    this.eventCalls.postEvent(userId, title, descriptions, adresse, startDate, startTime, endDate, endTime, this.markerLatitude, this.markerLongitude)
+    .subscribe((data) => {
+      console.log(data);
+    })
   }
   
 
