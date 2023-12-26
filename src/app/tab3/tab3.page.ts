@@ -3,6 +3,9 @@ import { GoogleMap, Marker } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { EventmodalPage } from '../eventmodal/eventmodal.page';
+import { EventCallsService } from '../calls/event/event-calls.service';
 
 
 let latitude: number;
@@ -16,7 +19,11 @@ let longitude: number;
 export class Tab3Page implements OnInit {
   @ViewChild('map') mapRef: ElementRef | any;
   newMap: GoogleMap | any;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router, 
+    private modalCtrl: ModalController,
+    private eventCalls: EventCallsService,
+    ) {}
 
   ngOnInit() {
     currentPosition().then((resp) => {
@@ -39,41 +46,67 @@ export class Tab3Page implements OnInit {
           lat: latitude,
           lng: longitude,
         },
-        zoom: 15,
+        zoom: 13,
       },
     });
     this.addMarkers()
   }
   async addMarkers(){
-    const markers: Marker[] = [
-      {
+    let allEventsId = await this.getAllEventId();
+    const markers: Marker[] = []
+    allEventsId.forEach(eventData => {
+      const marker: Marker = { 
         coordinate: {
-          lat: 55.6885639,
-          lng: 12.5079058,
+          lat: eventData.lat,
+          lng: eventData.lon,
         },
-        title: 'Somewhere near me',
-        snippet: "Yippee!"
-      },
-      {
-        coordinate: {
-          lat: 56.6885639,
-          lng: 13.5079058,
-        },
-        title: 'Futher from me',
-        snippet: "Yippee! 2"
+        title: eventData.title,
       }
-    ]
-
+      markers.push(marker);
+     })
+   
     await this.newMap.addMarkers(markers)
-
+   
     this.newMap.setOnMarkerClickListener(async (marker: any) => {
-      console.log(marker)
+      const matchingEvent = allEventsId.find(event => event.title === marker.title).id;
+      const modal = await this.modalCtrl.create({
+        component: EventmodalPage,
+        componentProps: {
+          id: matchingEvent,
+          marker
+        },
+        breakpoints: [0, 0.5],
+        initialBreakpoint: 0.5
+      });
+      modal.present();
     })
-  }
+   }
 
   toCreateEvent(){
     this.router.navigate(['/eventcreate'])
   }
+
+  async getAllEventId(){
+    let allEventsFromDatabase: any [] = [];
+    const data = await this.eventCalls.getAllEvents().toPromise();
+    let events = data['Data']['Event']
+    for (let key in events){
+      let eventId = events[key]['Id'];
+      let latitude = events[key]['Latitude']
+      let longitude = events[key]['Longitude']
+      let title = events[key]['Title']
+      let event = {
+        id: eventId,
+        lat: latitude,
+        lon: longitude,
+        title: title
+      }
+      console.log(event)
+      allEventsFromDatabase.push(event)
+    }
+    console.log(allEventsFromDatabase)
+    return allEventsFromDatabase
+   }
 
 }
 const currentPosition = async () => {

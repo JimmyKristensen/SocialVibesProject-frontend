@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{marker?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label>Adress: </ion-label>
+      <ion-text>{{Adress}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description: </ion-label>
+      <ion-text>{{Description}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Start date: {{StartDate}}</ion-label>
+      <ion-label>Start time: {{StartTime}} </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Stop Date: {{StopDate}}</ion-label>
+      <ion-label>Stop time: {{StopTime}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="joinEvent()">Join event</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
