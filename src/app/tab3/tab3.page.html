@@ -1,0 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Events</ion-title>
+    <ion-icon (click)="toCreateEvent()" slot="end" name="add-outline" class="icons"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <capacitor-google-map #map></capacitor-google-map>
+</ion-content>

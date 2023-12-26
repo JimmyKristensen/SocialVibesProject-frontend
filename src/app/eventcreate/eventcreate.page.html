@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Create Event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input label="Title"  placeholder="Enter Title"/>
+  </ion-item>
+  <ion-item>
+    <ion-textarea label="Descriptions" placeholder="Enter Descriptions"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Addresse" type="street-address"  placeholder="Enter Addresse"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Start date and time</ion-label>
+    <ion-datetime-button datetime="starttime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime locale="dk-DK" hourCycle="h23" id="starttime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+  <ion-item>
+    <ion-label>End date and time</ion-label>
+    <ion-datetime-button datetime="endtime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime locale="dk-DK" hourCycle="h23" id="endtime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+  <capacitor-google-map #createmap></capacitor-google-map>
+</ion-content>
+
+<ion-footer>
+  <ion-button>Create event</ion-button>
+</ion-footer>
