@@ -86,6 +86,10 @@ export class Tab3Page implements OnInit {
     this.router.navigate(['/eventcreate'])
   }
 
+  myEvents(){
+    this.router.navigate(['/eventjoined'])
+  }
+
   async getAllEventId(){
     let allEventsFromDatabase: any [] = [];
     const data = await this.eventCalls.getAllEvents().toPromise();
