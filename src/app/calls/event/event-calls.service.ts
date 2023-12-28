@@ -55,6 +55,16 @@ export class EventCallsService {
     return this.http.patch<any>(patchUrl,body, httpHeader)
   }
 
+  leaveEvent(userID: string, eventID: string): Observable<any> {
+    console.log("User id: "+userID, ", Chatroom id: "+eventID)
+    const body = { user_Id: userID }; 
+    return this.http.patch(`http://127.0.0.1:5000/event/leave/${eventID}`, body).pipe(
+      tap((response: any) => {
+        console.log(`Left event ${eventID} for user ${userID}: `, response);
+      })
+    );
+  }
+
   postEvent(useriD: string, title: string, descriptions: string, adress: string, startDate: string, startTime: string, endDate: string, endTime: string, latitude: string, longitude: string){
     const postUrl: string = "http://127.0.0.1:5000/event/create-event"
     const httpHeader = {

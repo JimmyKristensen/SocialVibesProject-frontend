@@ -32,7 +32,7 @@
       <ion-label>Stop time: {{joinedEvent.StopTime}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-button slot="end" color="danger">Leave event</ion-button>
+      <ion-button (click)="leaveChatroom(joinedEvent.EventID)" slot="end" color="danger">Leave event</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
