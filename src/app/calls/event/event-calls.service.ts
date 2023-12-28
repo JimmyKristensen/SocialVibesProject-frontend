@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventCallsService {
-
+ 
   constructor(private http: HttpClient) { }
 
   getAllEvents(): Observable<any>{
@@ -23,8 +23,23 @@ export class EventCallsService {
 
   getUsersJoinedEvents(userid: string): Observable<any>{
     return this.http.get('http://127.0.0.1:5000/event/user-events/'+userid).pipe(
-      tap(data => console.log('This is the events: ', data))
-    );
+      tap(data => console.log('This is the events: ', data)),
+      map((response: any) => {
+          // Check if response and response.Data are defined
+          if (response && response.Data) {
+            // Extract the communities object from the JSON response
+            const eventsObject = response.Data;
+        
+            // Convert the Data object to an array
+            const eventsArray = Object.values(eventsObject);
+        
+            return eventsArray;
+          } else {
+            console.error('Response or Event property not available.');
+            return [];
+          }
+        }
+      ));
   }
 
   joinEvent(eventID: string, userID: string){
