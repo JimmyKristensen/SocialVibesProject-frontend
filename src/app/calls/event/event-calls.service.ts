@@ -21,6 +21,12 @@ export class EventCallsService {
     );
   }
 
+  getUsersJoinedEvents(userid: string): Observable<any>{
+    return this.http.get('http://127.0.0.1:5000/event/user-events/'+userid).pipe(
+      tap(data => console.log('This is the events: ', data))
+    );
+  }
+
   joinEvent(eventID: string, userID: string){
     const patchUrl: string = "http://127.0.0.1:5000/event/join/" + eventID
     const httpHeader = {
@@ -35,25 +41,42 @@ export class EventCallsService {
   }
 
   postEvent(useriD: string, title: string, descriptions: string, adress: string, startDate: string, startTime: string, endDate: string, endTime: string, latitude: string, longitude: string){
-  const postUrl: string = "http://127.0.0.1:5000/event/create-event"
-  const httpHeader = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
+    const postUrl: string = "http://127.0.0.1:5000/event/create-event"
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+    const body = JSON.stringify({
+      "Latitude": latitude,
+      "Longitude": longitude,
+      "Description": descriptions,
+      "Admin" : useriD,
+      "Title": title,
+      "StartDate": startDate,
+      "StartTime": startTime,
+      "StopDate": endDate,
+      "StopTime": endTime,
+      "adress": adress
     })
-  };
-  const body = JSON.stringify({
-    "Latitude": latitude,
-    "Longitude": longitude,
-    "Description": descriptions,
-    "Admin" : useriD,
-    "Title": title,
-    "StartDate": startDate,
-    "StartTime": startTime,
-    "StopDate": endDate,
-    "StopTime": endTime,
-    "adress": adress
-  })
-  return this.http.post<any>(postUrl,body, httpHeader)
+    return this.http.post<any>(postUrl,body, httpHeader)
+  }
+
+  formateDate(dateToConveryt: string) {
+    let date = new Date(dateToConveryt);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let formattedDate = `${day}-${month}-${year}`;
+    return formattedDate
+  }
+  
+  formateTime(dateToConveryt: string){
+    let date = new Date(dateToConveryt);
+    let hours = date.getHours();
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    let formattedTime = `${hours}:${minutes}`;
+    return formattedTime
   }
 }
