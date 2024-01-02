@@ -1,7 +1,7 @@
 # Social Vibes - Frontend
   
-This is the frontend part of the exam project program, made for Social Vibes. It includes features for a working invidual chat, groupchat and a 
-community chat, all working with creates, gets and patch if your running it with the backend. This exam project is for the final exam of KEA Computer Scientist and consist the work of 3 students
+This is the frontend part of the exam project program, made for Social Vibes. It includes features for a working invidual chat, groupchat, 
+community chat and events, all working with creates, gets and patch if your running it with the backend. This exam project is for the final exam of KEA Computer Scientist and consist the work of 3 students
 for a 10 week working period of Scrum.
 
 
