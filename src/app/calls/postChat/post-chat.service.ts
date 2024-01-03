@@ -28,11 +28,12 @@ export class PostChatService {
     private profileService: UserSelectionService
     ) {}
   
-  addChatRoom(){
-    let participants : ParticipantsInterface = this.makeListOfParticipants()
-    console.log(this.http.post<ParticipantsInterface>(this.URLForApi, participants))
-    return this.http.post<ParticipantsInterface>(this.URLForApi, participants, this.httpHeader)
-  }
+    addChatRoom() {
+      let participants: ParticipantsInterface = this.makeListOfParticipants();
+    
+      // Return the observable
+      return this.http.post<any>(this.URLForApi, participants, this.httpHeader);
+    }
 
   removeAllFromArray(){
     //Used to set all the users isChecked status to false
