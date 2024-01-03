@@ -96,10 +96,10 @@ export class EventcreatePage implements OnInit {
 
   postEvent(title: string, descriptions: string, adresse: string, startInfo: string ,endInfo: string){
     const userId = this.userSelectionService.getID()
-    let startDate = formateDate(startInfo);
-    let startTime = formateTime(startInfo)
-    let endDate  = formateDate(endInfo)
-    let endTime = formateTime(endInfo)
+    let startDate = this.eventCalls.formateDate(startInfo);
+    let startTime = this.eventCalls.formateTime(startInfo)
+    let endDate  = this.eventCalls.formateDate(endInfo)
+    let endTime = this.eventCalls.formateTime(endInfo)
     console.log(title)
     console.log(descriptions)
     console.log(adresse)
@@ -124,22 +124,3 @@ const currentPosition = async () => {
   console.log('Current position:', coordinates);
   return coordinates
 };
-
-
-function formateDate(dateToConveryt: string) {
-  let date = new Date(dateToConveryt);
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let formattedDate = `${day}-${month}-${year}`;
-  return formattedDate
-}
-
-function formateTime(dateToConveryt: string){
-  let date = new Date(dateToConveryt);
-  let hours = date.getHours();
-  let minutes = date.getMinutes().toString().padStart(2, '0');
-  let formattedTime = `${hours}:${minutes}`;
-  return formattedTime
-}
-

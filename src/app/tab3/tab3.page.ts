@@ -52,9 +52,9 @@ export class Tab3Page implements OnInit {
     this.addMarkers()
   }
   async addMarkers(){
-    let allEventsId = await this.getAllEventId();
+    let allEventsList = await this.getAllEventList();
     const markers: Marker[] = []
-    allEventsId.forEach(eventData => {
+    allEventsList.forEach(eventData => {
       const marker: Marker = { 
         coordinate: {
           lat: eventData.lat,
@@ -68,7 +68,7 @@ export class Tab3Page implements OnInit {
     await this.newMap.addMarkers(markers)
    
     this.newMap.setOnMarkerClickListener(async (marker: any) => {
-      const matchingEvent = allEventsId.find(event => event.title === marker.title).id;
+      const matchingEvent = allEventsList.find(event => event.title === marker.title).id;
       const modal = await this.modalCtrl.create({
         component: EventmodalPage,
         componentProps: {
@@ -86,7 +86,11 @@ export class Tab3Page implements OnInit {
     this.router.navigate(['/eventcreate'])
   }
 
-  async getAllEventId(){
+  myEvents(){
+    this.router.navigate(['/eventjoined'])
+  }
+
+  async getAllEventList(){
     let allEventsFromDatabase: any [] = [];
     const data = await this.eventCalls.getAllEvents().toPromise();
     let events = data['Data']['Event']

@@ -21,13 +21,18 @@ const routes: Routes = [
   {
     path: 'communitychat',
     loadChildren: () => import('./communitychat/communitychat.module').then( m => m.CommunitychatPageModule)
-  },  {
+  },
+  {
     path: 'eventcreate',
     loadChildren: () => import('./eventcreate/eventcreate.module').then( m => m.EventcreatePageModule)
   },
   {
     path: 'eventmodal',
     loadChildren: () => import('./eventmodal/eventmodal.module').then( m => m.EventmodalPageModule)
+  },
+  {
+    path: 'eventjoined',
+    loadChildren: () => import('./event-joined/event-joined.module').then( m => m.EventJoinedPageModule)
   }
 
 
