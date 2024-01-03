@@ -14,17 +14,17 @@ export class CommunitiesCallsService {
     return this.http.get(getUrl + id).pipe(
       tap(data => console.log('This is the communities: ', data)),
       map((response: any) => {
-        // Check if response and response.Chatrooms are defined
+        // Check if response and response.communities are defined
         if (response && response.Chatrooms) {
           // Extract the communities object from the JSON response
           const communitiesObject = response.Chatrooms;
       
-          // Convert the chatrooms object to an array
+          // Convert the communities object to an array
           const communitiesArray = Object.values(communitiesObject);
       
           return communitiesArray;
         } else {
-          console.error('Response or Chatrooms property not available.');
+          console.error('Response or Communities property not available.');
           return [];
         }
       }

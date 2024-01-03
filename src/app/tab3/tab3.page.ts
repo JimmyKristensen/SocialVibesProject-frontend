@@ -31,7 +31,7 @@ export class Tab3Page implements OnInit {
       console.log(latitude)
       longitude = resp.coords.longitude;
       console.log(longitude)
-      this.createMap(); // Call createMap() here
+      this.createMap();
     })
   }
 

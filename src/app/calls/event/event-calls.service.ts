@@ -27,7 +27,7 @@ export class EventCallsService {
       map((response: any) => {
           // Check if response and response.Data are defined
           if (response && response.Data) {
-            // Extract the communities object from the JSON response
+            // Extract the events object from the JSON response
             const eventsObject = response.Data;
         
             // Convert the Data object to an array
