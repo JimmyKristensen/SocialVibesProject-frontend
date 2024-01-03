@@ -41,9 +41,12 @@ export class FrontpagePage {
   }
 
   reRoute(userID: string) {
+    this.chatroomService.getChatrooms(userID).subscribe((data) => {
+      console.log('Test data given: ', data);
       this.router.navigate(['./tabs/tab1'], {
         queryParams: { userID: userID },
       });
+    });
   }
 
   ngOnInit() {
