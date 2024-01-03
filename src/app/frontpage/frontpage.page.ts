@@ -37,16 +37,13 @@ export class FrontpagePage {
     // Save the selected user ID to the service
     this.userSelectionService.setSelectedUserId(this.selectedUserId);
 
-    this.fetchData(this.selectedUserId);
+    this.reRoute(this.selectedUserId);
   }
 
-  fetchData(userID: string) {
-    this.chatroomService.getChatrooms(userID).subscribe((data) => {
-      console.log('Test data given: ', data);
+  reRoute(userID: string) {
       this.router.navigate(['./tabs/tab1'], {
         queryParams: { userID: userID },
       });
-    });
   }
 
   ngOnInit() {

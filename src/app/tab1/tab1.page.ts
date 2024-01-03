@@ -154,8 +154,6 @@ ngOnInit() {
 
   invidChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
-
-
       // Navigate to invidChat.page and pass the messages
       this.router.navigate(['/invidChat'], {
         queryParams: {
@@ -167,8 +165,7 @@ ngOnInit() {
   groupChat(chatroom: any) {
     const chatroomId = chatroom.ChatroomID;
 
-
-      // Navigate to invidChat.page and pass the messages
+      // Navigate to groupChat.page and pass the messages
       this.router.navigate(['/groupChat'], {
         queryParams: {
           chatroomId
@@ -178,7 +175,7 @@ ngOnInit() {
   
   instaJoin(chatId: any, type: any) {
     const chatroomId = chatId;
-    
+    this.cancel()
     console.log("Join chatroom")
     if (type === "Individual Chat"){
       console.log("Joining indvid chat")
@@ -213,10 +210,24 @@ ngOnInit() {
         }
       });
   }
+
+  instaCommunity(chatID: any) {
+    const chatroomId = chatID
+
+
+      // Navigate to communitychat.page and pass the messages
+      this.router.navigate(['/communitychat'], {
+        queryParams: {
+          chatroomId
+        }
+      });
+  }
   
   clickToJoinCommunity(communityId: string){
     this.communitiesCallService.joinCommunity(communityId, this.userSelectionService.getID()).subscribe((data) => {
       console.log(data);
+      console.log(communityId)
+      this.instaCommunity(communityId)
     })
   }
   getSelectedBox(addProfileToChat : ProfileInterface){
