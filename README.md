@@ -14,6 +14,7 @@ To run the program frontend these are some basic requirements
 #### - Recommend using Visual Studio Code to run it
 #### - Typescript (Version Used: 5.0.4)
 These 2 imports to make sure events work
+#### npm install ngx-socket-io --force
 #### npm install @capacitor/google-maps --legacy-peer-deps
 #### npm install @capacitor/geolocation --legacy-peer-deps
 
