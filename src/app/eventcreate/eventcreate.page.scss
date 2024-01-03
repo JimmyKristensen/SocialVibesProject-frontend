@@ -5,3 +5,13 @@ capacitor-google-map {
     margin-left: 10%;
     margin-right: 10%;
   }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-content ion-back-button {
+    margin-right: 10px;
+  }
+  
