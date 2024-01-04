@@ -4,6 +4,22 @@ This is the frontend part of the exam project program, made for Social Vibes. It
 community chat and events, all working with creates, gets and patch if your running it with the backend. This exam project is for the final exam of KEA Computer Scientist and consist the work of 3 students
 for a 10 week working period of Scrum.
 
+Installation:
+
+Downloade Node.js
+In the node command promt:
+Run npm install -g @ionic/cli
+
+Clone the repository
+After navigate into the project path SocialVibesProject-frontend via either node command promt or you code editors terminal.
+
+Thereafter run:
+npm install ngx-socket-io --force
+npm install @capacitor/google-maps --legacy-peer-deps
+npm install @capacitor/geolocation --legacy-peer-deps
+
+To run the application:
+ionic serve
 
 ## Requirements:  
 To run the program frontend these are some basic requirements
