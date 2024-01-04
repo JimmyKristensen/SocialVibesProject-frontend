@@ -19,7 +19,7 @@ Thereafter run:
 #### - npm install @capacitor/geolocation --legacy-peer-deps
 
 To run the application:
-ionic serve
+#### ionic serve
 
 ## Requirements:  
 To run the program frontend these are some basic requirements
