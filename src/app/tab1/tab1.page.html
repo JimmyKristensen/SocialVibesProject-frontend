@@ -81,12 +81,12 @@
     <ion-label>@{{ chatroom?.Title }}</ion-label>
     <p>
       <ion-text>
-        {{ chatroom?.LastestMessage?.Message || 'No messages' }}
+        {{ chatroom?.['Latest Message'].Message  }}
       </ion-text>
     </p>
   </ion-label>
   <ion-text class="ion-text-center" slot="end" color="medium">
-    <p>01:30</p>
+    <p>{{chatroom?.['Latest Message'].TimeStamp.split(' ')[2].replace('-', ':').split('-')[0]}}</p>
     <p class="number-of-messages-none"></p>
   </ion-text>
 </ion-item>
@@ -106,12 +106,12 @@
     <ion-label>@{{ chatroom?.Title }}</ion-label>
     <p>
       <ion-text>
-        {{ chatroom?.LastMessage?.Message || 'No messages' }}
+        {{ chatroom?.['Latest Message'].Message }}
       </ion-text>
     </p>
   </ion-label>
   <ion-text class="ion-text-center" slot="end" color="medium">
-    <p>01:30</p>
+    <p>{{chatroom?.['Latest Message'].TimeStamp.split(' ')[2].replace('-', ':').split('-')[0]}}</p>
     <p class="number-of-messages-none"></p>
   </ion-text>
 </ion-item>

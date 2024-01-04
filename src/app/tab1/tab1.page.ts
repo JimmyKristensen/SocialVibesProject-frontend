@@ -124,11 +124,8 @@ ngOnInit() {
           if(!loggedInUser.match(userProfilForList.id)){
             this.usersList.push(userProfilForList)
           }
-          //console.log(userProfilForList)
         }
-        //console.log(this.usersList)
         this.lastUserId = this.usersList[this.usersList.length-1].id
-        //console.log(this.lastUserId)
       })
   }
 
@@ -244,7 +241,7 @@ ngOnInit() {
         const type = data.chatroomType;
         console.log("Type: ", type);
   
-        // Continue with your logic here, e.g., call ngOnInit
+        
         this.instaJoin(chatID, type)
       },
       (error) => {

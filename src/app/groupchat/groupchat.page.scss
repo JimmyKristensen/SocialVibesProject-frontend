@@ -66,3 +66,9 @@
 .header-content ion-back-button {
   margin-right: 10px;
 }
+
+ion-title {
+  white-space: normal;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}

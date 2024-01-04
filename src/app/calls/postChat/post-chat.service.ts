@@ -40,7 +40,7 @@ export class PostChatService {
     this.usersToAddToChatList.forEach(function(user) {
       user.isChecked = false
     })
-    //Removes eveyone else expted the logged in user
+    //Removes eveyone else besides the logged in user
     this.usersToAddToChatList = [this.mockLoggedInUser]
   }
 
@@ -50,7 +50,6 @@ export class PostChatService {
     if(addProfileToChat.isChecked === false){
       // If false add the selected to usersToAddToChatList array
       this.usersToAddToChatList.push(addProfileToChat)
-      // change the selected isChecked to true
       addProfileToChat.isChecked = true
     } else {
       // If isChecked is true, this will happend when a profile is deselected
@@ -60,10 +59,8 @@ export class PostChatService {
       if (index > -1) {
         this.usersToAddToChatList.splice(index, 1);
         }
-      //Changes the status to false again
       addProfileToChat.isChecked = false
     }
-    // Print out on consol the current array of wanted participants
     console.log(this.usersToAddToChatList)
   }
   
@@ -78,7 +75,6 @@ export class PostChatService {
     let admin: string = this.usersToAddToChatList[0].id
     console.log(admin)
   
-    // Discourse how to handle title
     let title: string = ""
     this.usersToAddToChatList.forEach(element => {
       title = title + element.name + ", "

@@ -54,9 +54,9 @@ export class EventJoinedPage implements OnInit {
   }
   
   confirmLeaveEvent(eventId: string) {
-    console.log('Leaving the chatroom...');
+    console.log('Leaving the event...');
     this.eventCalls.leaveEvent(this.userSelectionService.getID(), eventId).subscribe(() => {
-      // After leaving the chatroom, navigate back to tab1
+      // After leaving the event, navigate back to tab3
       this.getAllJoinedEvents()
     });
   }
