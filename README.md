@@ -8,15 +8,15 @@ Installation:
 
 Downloade Node.js
 In the node command promt:
-Run npm install -g @ionic/cli
+#### Run npm install -g @ionic/cli
 
 Clone the repository
 After navigate into the project path SocialVibesProject-frontend via either node command promt or you code editors terminal.
 
 Thereafter run:
-npm install ngx-socket-io --force
-npm install @capacitor/google-maps --legacy-peer-deps
-npm install @capacitor/geolocation --legacy-peer-deps
+#### - npm install ngx-socket-io --force
+#### - npm install @capacitor/google-maps --legacy-peer-deps
+#### - npm install @capacitor/geolocation --legacy-peer-deps
 
 To run the application:
 ionic serve
